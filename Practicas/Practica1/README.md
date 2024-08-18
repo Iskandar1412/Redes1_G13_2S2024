@@ -110,5 +110,5 @@ $ ipconfig
 ```
 
 ```bash
-ping <ip-destino>
+$ ping <ip-destino>
 ```

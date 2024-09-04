@@ -176,3 +176,33 @@ Tomar en cuenta que el `/24` hace referencia a la máscara de subred `255.255.25
 |S_RRHH             |22  |192.168.22.14|
 |S_CONTA            |22  |192.168.22.15|
 |S_IT               |22  |192.168.22.16|
+
+### Switches Clientes
+
+* Area Administrativa
+
+> SW7, SW8, SW10, SW14
+
+* Area Central
+
+> SW2, SW3, SW4, SW5, SW6, SW15
+
+* Oficina A
+
+> SW11, SW12, SW13
+
+- Configuraciones STP
+
+> SW1 --> root bridge para VLAN 12, 22, 32, 42
+
+### Switches Servidores
+
+* Area Central
+
+> SW1
+
+### Switches Transparentes
+
+* Area Administrativa
+
+> SW9

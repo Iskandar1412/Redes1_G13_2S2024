@@ -1,4 +1,4 @@
-## Sistemas de Bases de Datos 2 "B"
+## Redes 1 "N"
 
 | Nombre | Carnet | Usuario Git |
 | :------ | :-------: | -------: |
@@ -20,7 +20,7 @@
 
 |     CARPETA     |   MD   | Fecha Entrega | Prorroga |
 | :-------------: | :----: | :-----------: | :------: |
-| [Proyecto 1](./Proyectos/Proyecto1/) | [View](.) |      ---      |   ---   |
+| [Proyecto 1](./Proyectos/Proyecto1/) | [View](./Proyectos/Proyecto1/) |      07/Septiembre      |   ---   |
 | [Proyecto 2](./Proyectos/Proyecto2) | [View](.) |      ---      |   ---   |
 | [Proyecto 3](./Proyectos/Proyecto3) | [View](.) |      ---      |   ---   |
 
@@ -60,7 +60,7 @@
         <tr>
             <td rowspan=3 align="center">Proyectos</td>
             <td rowspan=1 align="center"><a href="./Enunciados/Proyectos/">Proyecto 1</a></td>
-            <td align="center">---</td>
+            <td align="center">07/Septiembre</td>
             <td align="center">---</td>
         </tr>
         <tr>

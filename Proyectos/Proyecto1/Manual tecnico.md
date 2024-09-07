@@ -96,7 +96,7 @@ configuracion inicial
 
 
         
-    -   **Transparente VTP (ej. SW9):**
+-   **Transparente VTP ( SW9):**
 
 			enable
 			conf t
@@ -108,8 +108,13 @@ configuracion inicial
 			vtp domain G13
 			vtp password usac
 			do w
-        
-        
-        
+
+
+ -   **configuracion de STP:**
+
+		
+        		enable
+			conf t
+			spanning-tree mode rapid-pvst
 
 

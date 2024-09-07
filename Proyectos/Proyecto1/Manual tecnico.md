@@ -85,7 +85,7 @@ configuracion inicial
     		do w
 			-- Protocolo
 			vtp mode client
-			vtp domain P32
+			vtp domain G13
 			vtp password usac
 			do w
 			-- ACCESO
@@ -105,7 +105,7 @@ configuracion inicial
 			do w
 			-- Modo
 			vtp mode transparent
-			vtp domain P32
+			vtp domain G13
 			vtp password usac
 			do w
         

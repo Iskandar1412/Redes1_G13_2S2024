@@ -201,6 +201,53 @@ Tomar en cuenta que el `/24` hace referencia a la máscara de subred `255.255.25
 
 > SW1
 
+#### Configuracion SW1 (Servidor)
+
+- Configuración inicial
+
+```bash
+enable
+conf t
+no ip domain-lookup
+hostname SW1
+do w
+```
+
+- Modo Truncal (configuración)
+
+```bash
+interface range fa0/19-24
+switchport trunk encapsulation dot1q
+switchport mode trunk
+exit
+do w
+```
+
+- Creación VLAN (configuración)
+
+```bash
+vlan 12
+name RRHH
+vlan 22
+name SECRETARIA
+vlan 32
+name CONTABILIDAD
+vlan 42
+name IT
+exit
+do w
+```
+
+- Configuración Protocolo
+
+```bash
+vtp version 2
+vtp mode server
+vtp domain G13
+vtp password usac
+do w
+```
+
 ### Switches Transparentes
 
 * Area Administrativa

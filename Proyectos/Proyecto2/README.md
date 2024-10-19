@@ -40,7 +40,7 @@ Donde Y es el último dígito del número de carnet con mayor denominación (En 
 
 Es importante tener en cuenta que al definir la máscara de red es necesario determinar la cantidad de hosts que se desean para la red, para ello se debe considerar dos aspectos escenciales:
 
-* La Parte de Red
+* La Parte de Red<br/>
 * La Parte de Host
 
 Es a través de la `Parte de Host` que se establece la cantidad de direcciones IP disponibles en la red, por lo que resulta crucial realizar cálculos para determinar adecuadamente la cantidad de hosts que la red podrá alojar.
@@ -51,17 +51,17 @@ Es a través de la `Parte de Host` que se establece la cantidad de direcciones I
 
 Para determinar la cantidad de equipos, se va a emplear la fórmula $2^2$. Se evaluarán varias opciones:
 
-    * Cuando $n = 3$, resulta en $2^3 =  8$ equipos.
-    * Cuando $n = 4$, resulta en $2^4 = 16$ equipos.
-    * Cuando $n = 5$, resulta en $2^5 = 32$ equipos.
-    * Cuando $n = 6$, resulta en $2^6 = 64$ equipos.
+* Cuando $n = 3$, resulta en $2^3 =  8$ equipos.<br/>
+* Cuando $n = 4$, resulta en $2^4 = 16$ equipos.<br/>
+* Cuando $n = 5$, resulta en $2^5 = 32$ equipos.<br/>
+* Cuando $n = 6$, resulta en $2^6 = 64$ equipos.<br/>
 
 Luego de obtener dichos resultados, se determina que la opción que se adapta mejor a la cantidad de equipos que se requieren es $n = 5$.
 
-Ventas       --> $Equipos = 25 -> 2^5$
-Informatica  --> $Equipos = 12 -> 2^4$
-RRHH         --> $Equipos = 10 -> 2^4$
-Contabilidad --> $Equipos = 4  -> 2^3$
+Ventas       --> $Equipos = 25 -> 2^5$<br/>
+Informatica  --> $Equipos = 12 -> 2^4$<br/>
+RRHH         --> $Equipos = 10 -> 2^4$<br/>
+Contabilidad --> $Equipos = 4  -> 2^3$<br/>
 
 **N** Representa la cantidad de bits que se utilizan para identificar la `Parte de Host`.
 
@@ -69,10 +69,10 @@ Contabilidad --> $Equipos = 4  -> 2^3$
 
 Una vez calculado **N**, se procede a determinar la cantidad de bits utilizados para la `Parte de Red`. Dicho cálculo se realiza dde la siguiente manera:
 
-Ventas       --> $32 - 5 = 27$ bits
-Informatica  --> $32 - 4 = 28$ bits
-RRHH         --> $32 - 4 = 28$ bits
-Contabilidad --> $32 - 3 = 29$ bits
+Ventas       --> $32 - 5 = 27$ bits<br/>
+Informatica  --> $32 - 4 = 28$ bits<br/>
+RRHH         --> $32 - 4 = 28$ bits<br/>
+Contabilidad --> $32 - 3 = 29$ bits<br/>
 
 Por lo tanto, concluimos que la cantidad de bits para la `Parte de Red` es de 27 bits, lo que se expresa en **CIDR** como `/27`.
 
@@ -86,21 +86,21 @@ Dado que la dirección IP consta de 32 bits, estos se representan de la siguient
 
 En este caso, la `Parte de Red` consta de 27 bits, se representa con unos (1's), mientras que la `Parte de Host`, con 5 bits, se representan con ceros (0's). En binario y decimal, sería de la siguiente manera.
 
-$2^7 + 2^6 + 2^5 + 2^4 + 2^3 + 2^2 + 2^1 + 2^0 = 255$ 
-$128 + 64 + 32 + 16 + 8 + 4 + 2 + 1 = 255$
+$2^7 + 2^6 + 2^5 + 2^4 + 2^3 + 2^2 + 2^1 + 2^0 = 255$<br/>
+$128 + 64 + 32 + 16 + 8 + 4 + 2 + 1 = 255$<br/>
 
-        * Ventas
+* Ventas
 $11111111.11111111.11111111.11100000 = 255.255.255.224$
-        * Informatica
+* Informatica
 $11111111.11111111.11111111.11110000 = 255.255.255.240$
-        * RRHH
+* RRHH
 $11111111.11111111.11111111.11110000 = 255.255.255.240$
-        * Contabilidad
+* Contabilidad
 $11111111.11111111.11111111.11111000 = 255.255.255.248$
 
-Donde `11100000` sería $128 + 64 + 32 + 0 + 0 + 0 + 0 + 0 = 224$
-Donde `11110000` sería $128 + 64 + 32 + 16 + 0 + 0 + 0 + 0 = 240$
-Donde `11111000` sería $128 + 64 + 32 + 16 + 8 + 0 + 0 + 0 = 248$
+Donde `11100000` sería $128 + 64 + 32 + 0 + 0 + 0 + 0 + 0 = 224$<br/>
+Donde `11110000` sería $128 + 64 + 32 + 16 + 0 + 0 + 0 + 0 = 240$<br/>
+Donde `11111000` sería $128 + 64 + 32 + 16 + 8 + 0 + 0 + 0 = 248$<br/>
 
 Por lo que la máscara es **255.255.255.224**
 
@@ -108,10 +108,10 @@ Por lo que la máscara es **255.255.255.224**
 
 Para realizar este cálculo, se deben utilizar exclusivamente la cantidad de equpos determinada en el **Paso 1**. 
 
-Ventas       --> $255.255.255.255 - 255.255.255.224 = 31$
-Informatica  --> $255.255.255.255 - 255.255.255.240 = 15$
-RRHH         --> $255.255.255.255 - 255.255.255.240 = 15$
-Contabilidad --> $255.255.255.255 - 255.255.255.248 = 7$
+Ventas       --> $255.255.255.255 - 255.255.255.224 = 31$<br/>
+Informatica  --> $255.255.255.255 - 255.255.255.240 = 15$<br/>
+RRHH         --> $255.255.255.255 - 255.255.255.240 = 15$<br/>
+Contabilidad --> $255.255.255.255 - 255.255.255.248 = 7$<br/>
 
 | VLAN         | ID de VLAN | Equipos | Máscara de Red  | Wildcard |
 | :---         | :---:      | ---:    | :---:           | :---     |
@@ -208,13 +208,13 @@ Donde Y es el último dígito del número de carnet con mayor denominación (En 
 
 1. Calcular la cantidad de equipos de la `Parte de Host`
 
-    * Cuando $n = 3$, resulta en $2^3 =  8$ equipos.
-    * Cuando $n = 4$, resulta en $2^4 = 16$ equipos.
-    * Cuando $n = 5$, resulta en $2^5 = 32$ equipos.
-    * Cuando $n = 6$, resulta en $2^6 = 64$ equipos.
+    * Cuando $n = 3$, resulta en $2^3 =  8$ equipos.<br/>
+    * Cuando $n = 4$, resulta en $2^4 = 16$ equipos.<br/>
+    * Cuando $n = 5$, resulta en $2^5 = 32$ equipos.<br/>
+    * Cuando $n = 6$, resulta en $2^6 = 64$ equipos.<br/>
 
-Ventas       --> $Equipos = 20 -> 2^5$
-RRHH         --> $Equipos = 5  -> 2^3$
+Ventas       --> $Equipos = 20 -> 2^5$<br/>
+RRHH         --> $Equipos = 5  -> 2^3$<br/>
 
 **N** Representa la cantidad de bits que se utilizan para identificar la `Parte de Host`.
 
@@ -222,8 +222,8 @@ RRHH         --> $Equipos = 5  -> 2^3$
 
 Una vez calculado **N**, se procede a determinar la cantidad de bits utilizados para la `Parte de Red`. Dicho cálculo se realiza dde la siguiente manera:
 
-Ventas       --> $32 - 5 = 27$ bits -> **CIDR::** `/27`
-RRHH         --> $32 - 3 = 29$ bits -> **CIDR::** `/29`
+Ventas       --> $32 - 5 = 27$ bits -> **CIDR::** `/27`<br/>
+RRHH         --> $32 - 3 = 29$ bits -> **CIDR::** `/29`<br/>
 
 >> **Nota:** Se restan con 32 debido a que se está evaluuando una dirección IPv4, la cual consta de 32 bits.
 
@@ -231,23 +231,23 @@ RRHH         --> $32 - 3 = 29$ bits -> **CIDR::** `/29`
 
 Dado que la dirección IP consta de 32 bits, estos se representan de la siguiente manera:
 
-$2^7 + 2^6 + 2^5 + 2^4 + 2^3 + 2^2 + 2^1 + 2^0 = 255$ 
-$128 + 64 + 32 + 16 + 8 + 4 + 2 + 1 = 255$
+$2^7 + 2^6 + 2^5 + 2^4 + 2^3 + 2^2 + 2^1 + 2^0 = 255$ <br/>
+$128 + 64 + 32 + 16 + 8 + 4 + 2 + 1 = 255$<br/>
 
-        * Ventas
+* Ventas
 $11111111.11111111.11111111.11100000 = 255.255.255.224$
-        * RRHH
+* RRHH
 $11111111.11111111.11111111.11111000 = 255.255.255.248$
 
-Donde `11100000` sería $128 + 64 + 32 + 0 + 0 + 0 + 0 + 0 = 224$
-Donde `11111000` sería $128 + 64 + 32 + 16 + 8 + 0 + 0 + 0 = 248$
+Donde `11100000` sería $128 + 64 + 32 + 0 + 0 + 0 + 0 + 0 = 224$<br/>
+Donde `11111000` sería $128 + 64 + 32 + 16 + 8 + 0 + 0 + 0 = 248$<br/>
 
 4. Cálculo de Wildcard
 
 Para realizar este cálculo, se deben utilizar exclusivamente la cantidad de equpos determinada en el **Paso 1**. 
 
-Ventas       --> $255.255.255.255 - 255.255.255.224 = 31$
-RRHH         --> $255.255.255.255 - 255.255.255.248 = 7$
+Ventas       --> $255.255.255.255 - 255.255.255.224 = 31$<br/>
+RRHH         --> $255.255.255.255 - 255.255.255.248 = 7$<br/>
 
 | VLAN         | ID de VLAN | Equipos | Máscara de Red  | Wildcard |
 | :---         | :---:      | ---:    | :---:           | :---     |
@@ -328,17 +328,15 @@ Donde Y es el último dígito del número de carnet con mayor denominación (En 
 
 1. Calcular la cantidad de equipos de la `Parte de Host`
 
-Para determinar la cantidad de equipos, se va a emplear la fórmula $2^2$. Se evaluarán varias opciones:
+    * Cuando $n = 3$, resulta en $2^3 =  8$ equipos.<br/>
+    * Cuando $n = 4$, resulta en $2^4 = 16$ equipos.<br/>
+    * Cuando $n = 5$, resulta en $2^5 = 32$ equipos.<br/>
+    * Cuando $n = 6$, resulta en $2^6 = 64$ equipos.<br/>
 
-    * Cuando $n = 3$, resulta en $2^3 =  8$ equipos.
-    * Cuando $n = 4$, resulta en $2^4 = 16$ equipos.
-    * Cuando $n = 5$, resulta en $2^5 = 32$ equipos.
-    * Cuando $n = 6$, resulta en $2^6 = 64$ equipos.
-
-Ventas       --> $Equipos = 36 -> 2^6$
-Informatica  --> $Equipos = 21 -> 2^5$
-RRHH         --> $Equipos = 12 -> 2^4$
-Contabilidad --> $Equipos = 10 -> 2^4$
+Ventas       --> $Equipos = 36 -> 2^6$<br/>
+Informatica  --> $Equipos = 21 -> 2^5$<br/>
+RRHH         --> $Equipos = 12 -> 2^4$<br/>
+Contabilidad --> $Equipos = 10 -> 2^4$<br/>
 
 **N** Representa la cantidad de bits que se utilizan para identificar la `Parte de Host`.
 
@@ -346,10 +344,10 @@ Contabilidad --> $Equipos = 10 -> 2^4$
 
 Una vez calculado **N**, se procede a determinar la cantidad de bits utilizados para la `Parte de Red`. Dicho cálculo se realiza dde la siguiente manera:
 
-Ventas       --> $32 - 6 = 26$ bits -> **CIDR::** `/26`
-Informatica  --> $32 - 5 = 27$ bits -> **CIDR::** `/27`
-RRHH         --> $32 - 4 = 28$ bits -> **CIDR::** `/28`
-Contabilidad --> $32 - 4 = 28$ bits -> **CIDR::** `/28`
+Ventas       --> $32 - 6 = 26$ bits -> **CIDR::** `/26`<br/>
+Informatica  --> $32 - 5 = 27$ bits -> **CIDR::** `/27`<br/>
+RRHH         --> $32 - 4 = 28$ bits -> **CIDR::** `/28`<br/>
+Contabilidad --> $32 - 4 = 28$ bits -> **CIDR::** `/28`<br/>
 
 >> **Nota:** Se restan con 32 debido a que se está evaluuando una dirección IPv4, la cual consta de 32 bits.
 
@@ -357,30 +355,30 @@ Contabilidad --> $32 - 4 = 28$ bits -> **CIDR::** `/28`
 
 Dado que la dirección IP consta de 32 bits, estos se representan de la siguiente manera:
 
-$2^7 + 2^6 + 2^5 + 2^4 + 2^3 + 2^2 + 2^1 + 2^0 = 255$ 
-$128 + 64 + 32 + 16 + 8 + 4 + 2 + 1 = 255$
+$2^7 + 2^6 + 2^5 + 2^4 + 2^3 + 2^2 + 2^1 + 2^0 = 255$<br/>
+$128 + 64 + 32 + 16 + 8 + 4 + 2 + 1 = 255$<br/>
 
-        * Ventas
+* Ventas
 $11111111.11111111.11111111.11000000 = 255.255.255.192$
-        * Informatica
+* Informatica
 $11111111.11111111.11111111.11100000 = 255.255.255.224$
-        * RRHH
+* RRHH
 $11111111.11111111.11111111.11110000 = 255.255.255.240$
-        * Contabilidad
+* Contabilidad
 $11111111.11111111.11111111.11110000 = 255.255.255.240$
 
-Donde `11000000` sería $128 + 64 + 0 + 0 + 0 + 0 + 0 + 0 = 192$
-Donde `11100000` sería $128 + 64 + 32 + 0 + 0 + 0 + 0 + 0 = 224$
-Donde `11110000` sería $128 + 64 + 32 + 16 + 0 + 0 + 0 + 0 = 240$
+Donde `11000000` sería $128 + 64 + 0 + 0 + 0 + 0 + 0 + 0 = 192$<br/>
+Donde `11100000` sería $128 + 64 + 32 + 0 + 0 + 0 + 0 + 0 = 224$<br/>
+Donde `11110000` sería $128 + 64 + 32 + 16 + 0 + 0 + 0 + 0 = 240$<br/>
 
 4. Cálculo de Wildcard
 
 Para realizar este cálculo, se deben utilizar exclusivamente la cantidad de equpos determinada en el **Paso 1**. 
 
-Ventas       --> $255.255.255.255 - 255.255.255.192 = 63$
-Informatica  --> $255.255.255.255 - 255.255.255.224 = 31$
-RRHH         --> $255.255.255.255 - 255.255.255.240 = 15$
-Contabilidad --> $255.255.255.255 - 255.255.255.240 = 15$
+Ventas       --> $255.255.255.255 - 255.255.255.192 = 63$<br/>
+Informatica  --> $255.255.255.255 - 255.255.255.224 = 31$<br/>
+RRHH         --> $255.255.255.255 - 255.255.255.240 = 15$<br/>
+Contabilidad --> $255.255.255.255 - 255.255.255.240 = 15$<br/>
 
 | VLAN         | ID de VLAN | Equipos | Máscara de Red  | Wildcard |
 | :---         | :---:      | ---:    | :---:           | :---     |
@@ -479,16 +477,14 @@ Donde Y es el último dígito del número de carnet con mayor denominación (En 
 
 1. Calcular la cantidad de equipos de la `Parte de Host`
 
-Para determinar la cantidad de equipos, se va a emplear la fórmula $2^2$. Se evaluarán varias opciones:
+    * Cuando $n = 3$, resulta en $2^3 =  8$ equipos.<br/>
+    * Cuando $n = 4$, resulta en $2^4 = 16$ equipos.<br/>
+    * Cuando $n = 5$, resulta en $2^5 = 32$ equipos.<br/>
+    * Cuando $n = 6$, resulta en $2^6 = 64$ equipos.<br/>
 
-    * Cuando $n = 3$, resulta en $2^3 =  8$ equipos.
-    * Cuando $n = 4$, resulta en $2^4 = 16$ equipos.
-    * Cuando $n = 5$, resulta en $2^5 = 32$ equipos.
-    * Cuando $n = 6$, resulta en $2^6 = 64$ equipos.
-
-Ventas       --> $Equipos = 30 -> 2^5$
-Informatica  --> $Equipos = 15 -> 2^5$
-RRHH         --> $Equipos = 10 -> 2^4$
+Ventas       --> $Equipos = 30 -> 2^5$<br/>
+Informatica  --> $Equipos = 15 -> 2^5$<br/>
+RRHH         --> $Equipos = 10 -> 2^4$<br/>
 
 **N** Representa la cantidad de bits que se utilizan para identificar la `Parte de Host`.
 
@@ -496,9 +492,9 @@ RRHH         --> $Equipos = 10 -> 2^4$
 
 Una vez calculado **N**, se procede a determinar la cantidad de bits utilizados para la `Parte de Red`. Dicho cálculo se realiza dde la siguiente manera:
 
-Ventas       --> $32 - 5 = 27$ bits -> **CIDR::** `/27`
-Informatica  --> $32 - 5 = 27$ bits -> **CIDR::** `/27`
-RRHH         --> $32 - 4 = 28$ bits -> **CIDR::** `/28`
+Ventas       --> $32 - 5 = 27$ bits -> **CIDR::** `/27`<br/>
+Informatica  --> $32 - 5 = 27$ bits -> **CIDR::** `/27`<br/>
+RRHH         --> $32 - 4 = 28$ bits -> **CIDR::** `/28`<br/>
 
 >> **Nota:** Se restan con 32 debido a que se está evaluuando una dirección IPv4, la cual consta de 32 bits.
 
@@ -506,26 +502,26 @@ RRHH         --> $32 - 4 = 28$ bits -> **CIDR::** `/28`
 
 Dado que la dirección IP consta de 32 bits, estos se representan de la siguiente manera:
 
-$2^7 + 2^6 + 2^5 + 2^4 + 2^3 + 2^2 + 2^1 + 2^0 = 255$ 
-$128 + 64 + 32 + 16 + 8 + 4 + 2 + 1 = 255$
+$2^7 + 2^6 + 2^5 + 2^4 + 2^3 + 2^2 + 2^1 + 2^0 = 255$<br/>
+$128 + 64 + 32 + 16 + 8 + 4 + 2 + 1 = 255$<br/>
 
-        * Ventas
-$11111111.11111111.11111111.11100000 = 255.255.255.224$
-        * Informatica
-$11111111.11111111.11111111.11100000 = 255.255.255.224$
-        * RRHH
-$11111111.11111111.11111111.11110000 = 255.255.255.240$
+* Ventas
+$11111111.11111111.11111111.11100000 = 255.255.255.224$<br/>
+* Informatica
+$11111111.11111111.11111111.11100000 = 255.255.255.224$<br/>
+* RRHH
+$11111111.11111111.11111111.11110000 = 255.255.255.240$<br/>
 
-Donde `11100000` sería $128 + 64 + 32 + 0 + 0 + 0 + 0 + 0 = 224$
-Donde `11110000` sería $128 + 64 + 32 + 16 + 0 + 0 + 0 + 0 = 240$
+Donde `11100000` sería $128 + 64 + 32 + 0 + 0 + 0 + 0 + 0 = 224$<br/>
+Donde `11110000` sería $128 + 64 + 32 + 16 + 0 + 0 + 0 + 0 = 240$<br/>
 
 4. Cálculo de Wildcard
 
 Para realizar este cálculo, se deben utilizar exclusivamente la cantidad de equpos determinada en el **Paso 1**. 
 
-Ventas       --> $255.255.255.255 - 255.255.255.224 = 31$
-Informatica  --> $255.255.255.255 - 255.255.255.224 = 31$
-RRHH         --> $255.255.255.255 - 255.255.255.240 = 15$
+Ventas       --> $255.255.255.255 - 255.255.255.224 = 31$<br/>
+Informatica  --> $255.255.255.255 - 255.255.255.224 = 31$<br/>
+RRHH         --> $255.255.255.255 - 255.255.255.240 = 15$<br/>
 
 | VLAN         | ID de VLAN | Equipos | Máscara de Red  | Wildcard |
 | :---         | :---:      | ---:    | :---:           | :---     |
@@ -614,16 +610,14 @@ Donde Y es el último dígito del número de carnet con mayor denominación (En 
 
 1. Calcular la cantidad de equipos de la `Parte de Host`
 
-Para determinar la cantidad de equipos, se va a emplear la fórmula $2^2$. Se evaluarán varias opciones:
+    * Cuando $n = 3$, resulta en $2^3 =  8$ equipos.<br/>
+    * Cuando $n = 4$, resulta en $2^4 = 16$ equipos.<br/>
+    * Cuando $n = 5$, resulta en $2^5 = 32$ equipos.<br/>
+    * Cuando $n = 6$, resulta en $2^6 = 64$ equipos.<br/>
 
-    * Cuando $n = 3$, resulta en $2^3 =  8$ equipos.
-    * Cuando $n = 4$, resulta en $2^4 = 16$ equipos.
-    * Cuando $n = 5$, resulta en $2^5 = 32$ equipos.
-    * Cuando $n = 6$, resulta en $2^6 = 64$ equipos.
-
-Ventas       --> $Equipos = 25 -> 2^5$
-RRHH         --> $Equipos = 10 -> 2^4$
-Contabilidad --> $Equipos = 5  -> 2^3$
+Ventas       --> $Equipos = 25 -> 2^5$<br/>
+RRHH         --> $Equipos = 10 -> 2^4$<br/>
+Contabilidad --> $Equipos = 5  -> 2^3$<br/>
 
 **N** Representa la cantidad de bits que se utilizan para identificar la `Parte de Host`.
 
@@ -631,9 +625,9 @@ Contabilidad --> $Equipos = 5  -> 2^3$
 
 Una vez calculado **N**, se procede a determinar la cantidad de bits utilizados para la `Parte de Red`. Dicho cálculo se realiza dde la siguiente manera:
 
-Ventas       --> $32 - 5 = 27$ bits -> **CIDR::** `/27`
-RRHH         --> $32 - 4 = 28$ bits -> **CIDR::** `/28`
-Contabilidad --> $32 - 3 = 29$ bits -> **CIDR::** `/29`
+Ventas       --> $32 - 5 = 27$ bits -> **CIDR::** `/27`<br/>
+RRHH         --> $32 - 4 = 28$ bits -> **CIDR::** `/28`<br/>
+Contabilidad --> $32 - 3 = 29$ bits -> **CIDR::** `/29`<br/>
 
 >> **Nota:** Se restan con 32 debido a que se está evaluuando una dirección IPv4, la cual consta de 32 bits.
 
@@ -641,27 +635,27 @@ Contabilidad --> $32 - 3 = 29$ bits -> **CIDR::** `/29`
 
 Dado que la dirección IP consta de 32 bits, estos se representan de la siguiente manera:
 
-$2^7 + 2^6 + 2^5 + 2^4 + 2^3 + 2^2 + 2^1 + 2^0 = 255$ 
-$128 + 64 + 32 + 16 + 8 + 4 + 2 + 1 = 255$
+$2^7 + 2^6 + 2^5 + 2^4 + 2^3 + 2^2 + 2^1 + 2^0 = 255$<br/>
+$128 + 64 + 32 + 16 + 8 + 4 + 2 + 1 = 255$<br/>
 
-        * Ventas
+* Ventas
 $11111111.11111111.11111111.11100000 = 255.255.255.224$
-        * RRHH
+* RRHH
 $11111111.11111111.11111111.11110000 = 255.255.255.240$
-        * Contabilidad
+* Contabilidad
 $11111111.11111111.11111111.11111000 = 255.255.255.248$
 
-Donde `11100000` sería $128 + 64 + 32 + 0 + 0 + 0 + 0 + 0 = 224$
-Donde `11110000` sería $128 + 64 + 32 + 16 + 0 + 0 + 0 + 0 = 240$
-Donde `11111000` sería $128 + 64 + 32 + 16 + 8 + 0 + 0 + 0 = 248$
+Donde `11100000` sería $128 + 64 + 32 + 0 + 0 + 0 + 0 + 0 = 224$<br/>
+Donde `11110000` sería $128 + 64 + 32 + 16 + 0 + 0 + 0 + 0 = 240$<br/>
+Donde `11111000` sería $128 + 64 + 32 + 16 + 8 + 0 + 0 + 0 = 248$<br/>
 
 4. Cálculo de Wildcard
 
 Para realizar este cálculo, se deben utilizar exclusivamente la cantidad de equpos determinada en el **Paso 1**. 
 
-Ventas       --> $255.255.255.255 - 255.255.255.224 = 31$
-RRHH         --> $255.255.255.255 - 255.255.255.240 = 15$
-Contabilidad --> $255.255.255.255 - 255.255.255.248 = 7$
+Ventas       --> $255.255.255.255 - 255.255.255.224 = 31$<br/>
+RRHH         --> $255.255.255.255 - 255.255.255.240 = 15$<br/>
+Contabilidad --> $255.255.255.255 - 255.255.255.248 = 7$<br/>
 
 | VLAN         | ID de VLAN | Equipos | Máscara de Red  | Wildcard |
 | :---         | :---:      | ---:    | :---:           | :---     |

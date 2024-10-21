@@ -874,6 +874,11 @@ do wr -- puede ser end -> do copy running-config startup config
 ```
 
 ### Área CENTRAL
+#### Switches
+##### 2960-24TT (Switch2)
+```
+
+```
 
 #### ROUTER
 ##### ROUTER-PT (CENTRAL)
@@ -907,82 +912,720 @@ do wr -- puede ser end -> do copy running-config startup config
 
 ```
 
-#### Switches
-##### 2960-24TT (Switch2)
-```
-
-```
-
 ### Área JUTIAPA
 
 #### Router
 ##### Router-PT (J1)
 ```
+-- HSRP
+int fa1/0
+standby 10 ip 192.168.13.1
+standby 10 priority 150
+standby 10 preempt
+no shutdown
+exit
+do wr
+```
 
+```
+-- Configuración de IP y Máscara en cada puerto correspondiente
+int fa0/0
+ip address 11.0.0.1 255.255.255.0
+no shut
+exit
+do wr
 ```
 
 ##### Router-PT (J2)
 ```
+-- HSRP
+int fa1/0
+standby 10 ip 192.168.13.1
+standby 10 priority 100
+standby 10 preempt
+no shutdown
+exit
+do wr
+```
 
 ```
+-- Configuración de IP y Máscara en cada puerto correspondiente
+int fa0/0
+ip address 11.0.0.2 255.255.255.0
+no shut
+exit
+do wr
+```
+
 
 #### Switches
-##### 2960-24TT (SW2)
+##### 3560-24PS (ESW1)
+```
+-- Configuración modo truncal
+int range fa0/21 - 24
+switchport trunk encapsulation dot1q
+switchport mode trunk
+no shutdown
+exit
+do wr
 ```
 
+```
+-- Configuración del protocolo
+vtp version 2
+vtp mode server
+vtp domain G13
+vtp password usac
+do wr
+```
+
+```
+-- Creación VLAN
+vlan 18
+name RRHH
+vlan 28
+name CONTABILIDAD
+vlan 38
+name VENTAS
+vlan 48
+name INFORMATICA
+exit
+do wr
+```
+
+```
+-- Configuración VLAN's con STP
+spanning-tree vlan 1 root primary
+spanning-tree vlan 18 root primary
+spanning-tree vlan 28 root primary
+spanning-tree vlan 38 root primary
+spanning-tree vlan 48 root primary
+do wr
+```
+
+```
+-- Configuración VLAN's como Switch Virtual Interface (SVI)
+int vlan 38
+ip address 192.168.13.1 255.255.255.224
+no shutdown
+exit
+do wr
+
+int vlan 48
+ip address 192.168.13.33 255.255.255.240
+no shutdown
+exit
+do wr
+
+int vlan 18
+ip address 192.168.13.49 255.255.255.240
+no shutdown
+exit
+do wr
+
+int vlan 28
+ip address 192.168.13.65 255.255.255.248
+no shutdown
+exit
+do wr
+```
+
+```
+-- Configuración STP (RPVSTP)
+spanning-tree mode rapid-pvst
+do wr
+```
+
+##### 2960-24TT (SW2)
+```
+-- Configuración modo truncal
+int fa0/22
+switchport mode trunk
+exit
+do wr
+```
+
+```
+-- Conciguración protocolo
+vtp mode client
+vtp domain G13
+vtp password usac
+do wr
+```
+
+```
+-- Modo Acceso
+--- Asignación VLANS Arbitrariamente
+# VPC14
+int fa0/1
+switchport mode access
+switchport access vlan 18
+exit
+do wr
+
+# VPC8
+int fa0/2
+switchport mode access
+switchport access vlan 28
+exit
+do wr
+
+# VPC6
+int fa0/3
+switchport mode access
+switchport access vlan 38
+exit
+do wr
+```
+
+- SW2 - SW3 (LACP)
+```
+int range fa0/23 - 24
+channel-protocol lacp
+channel-group 1 mode active
+no shut
+exit
+do wr 
+```
+
+```
+-- Configuración STP (RRVST)
+spanning-tree mode rapid-pvst
+do wr
 ```
 
 ##### 2960-24TT (SW3)
 ```
-
+-- Configuración modo truncal
+int fa0/22
+switchport mode trunk
+exit
+do wr
 ```
 
-##### 3560-24PS (ESW1)
+```
+-- Conciguración protocolo
+vtp mode client
+vtp domain G13
+vtp password usac
+do wr
 ```
 
+```
+-- Modo Acceso
+--- Asignación VLANS Arbitrariamente
+# VPC7
+int fa0/1
+switchport mode access
+switchport access vlan 48
+exit
+do wr
+
+# VPC5
+int fa0/2
+switchport mode access
+switchport access vlan 18
+exit
+do wr
+
+# VPC15
+int fa0/3
+switchport mode access
+switchport access vlan 28
+exit
+do wr
+```
+
+- SW2 - SW3 (LACP)
+```
+int range fa0/23 - 24
+channel-protocol lacp
+channel-group 1 mode active
+no shut
+exit
+do wr 
+```
+
+```
+-- Configuración STP (RRVST)
+spanning-tree mode rapid-pvst
+do wr
 ```
 
 ### Área ESCUINTLA
 #### Switches
 ##### 2960-24TT (SW5)
 ```
+-- Configuración modo truncal
+int fa0/24
+switchport mode trunk
+exit
+do wr
+```
 
+```
+-- Creación VLAN's
+vlan 18
+name RRHH
+vlan 38
+name VENTAS
+exit
+do wr
+```
+
+```
+-- Configuración modo Acceso
+# PC2
+int fa0/1
+switchport mode access
+switchport access vlan 18
+exit
+
+# PC3
+int fa0/2
+switchport mode access
+switchport access vlan 38
+exit
+do wr
+```
+
+```
+-- Configuración STP (RPVST)
+spanning-tree mode rapid-pvst
+exit
 ```
 
 ### Área IZABAL
-##### 2960-24TT (Switch1)
-```
-
-```
-
+#### Switches
 ##### 3560-24PS (ESW3)
 ```
+-- Configuración modo truncal
+int range fa23 - 24
+switchport trunk encapsulation dot1q
+switchport mode trunk
+no shut
+exit
+do wr
+```
 
+```
+-- Configuración del protocolo
+vtp version 2
+vtp mode server
+vtp domain G13
+vtp password usac
+do wr
+```
+
+```
+-- Creación VLAN
+vlan 18
+name RRHH
+vlan 28
+name CONTABILIDAD
+vlan 38
+name VENTAS
+exit
+do wr
+```
+
+```
+-- Configuración VLAN's con STP
+spanning-tree vlan 1 root primary
+spanning-tree vlan 18 root primary
+spanning-tree vlan 28 root primary
+spanning-tree vlan 38 root primary
+do wr
+```
+
+```
+-- Configuración VLAN's como Switch Virtual Interface (SVI)
+int vlan 38
+ip address 192.167.13.1 255.255.255.224
+no shut
+exit
+do wr
+
+int vlan 18
+ip address 192.167.13.33 255.255.255.240
+no shut
+exit
+do wr
+
+int vlan 28
+ip address 192.167.13.49 255.255.255.248
+no shut
+exit
+do wr
+```
+
+```
+-- Configuración STP (RPVSTP)
+spanning-tree mode rapid-pvst
+do wr
+```
+
+##### 2960-24TT (Switch1)
+```
+-- Configuración modo truncal
+int fa0/24
+switchport mode trunk
+exit
+do wr
+```
+
+```
+-- Conciguración protocolo
+vtp mode client
+vtp domain G13
+vtp password usac
+do wr
+```
+
+```
+-- Modo Acceso
+--- Asignación VLANS Arbitrariamente
+# VPC15
+int fa0/1
+switchport mode access
+switchport access vlan 18
+exit
+do wr
+
+# VPC16
+int fa0/2
+switchport mode access
+switchport access vlan 38
+exit
+do wr
+```
+
+```
+-- Configuración STP (RRVST)
+spanning-tree mode rapid-pvst
+do wr
 ```
 
 ### Área PETÉN
-##### 2960-24TT (Switch0)
-```
-
-```
-
+#### Switches
 ##### 3560-24PS (ESW2)
 ```
+-- Configuración modo truncal
+int range fa0/23 - 24
+switchport trunk encapsulation dot1q
+switchport mode trunk
+no shutdown
+exit
+do wr
+```
 
+```
+-- Configuración del protocolo
+vtp version 2
+vtp mode server
+vtp domain G13
+vtp password usac
+do wr
+```
+
+```
+-- Creación VLAN
+vlan 18
+name RRHH
+vlan 38
+name VENTAS
+vlan 48
+name INFORMATICA
+exit
+do wr
+```
+
+```
+-- Configuración VLAN's con STP
+spanning-tree vlan 1 root primary
+spanning-tree vlan 18 root primary
+spanning-tree vlan 38 root primary
+spanning-tree vlan 48 root primary
+do wr
+```
+
+```
+-- Configuración VLAN's como Switch Virtual Interface (SVI)
+int vlan 38
+ip address 192.158.13.1 255.255.255.224
+no shutdown
+exit
+do wr
+
+int vlan 48
+ip address 192.158.13.33 255.255.255.224
+no shutdown
+exit
+do wr
+
+int vlan 18
+ip address 192.158.13.65 255.255.255.240
+no shutdown
+exit
+do wr
+```
+
+```
+-- Configuración STP (RPVSTP)
+spanning-tree mode rapid-pvst
+do wr
+```
+
+##### 2960-24TT (Switch0)
+```
+-- Configuración modo truncal
+int fa0/24
+switchport mode trunk
+exit
+do wr
+```
+
+```
+-- Conciguración protocolo
+vtp mode client
+vtp domain G13
+vtp password usac
+do wr
+```
+
+```
+-- Modo Acceso
+--- Asignación VLANS Arbitrariamente
+# VPC6
+int fa0/1
+switchport mode access
+switchport access vlan 18
+exit
+do wr
+
+# VPC5
+int fa0/2
+switchport mode access
+switchport access vlan 38
+exit
+do wr
+
+# VPC7
+int fa0/3
+switchport mode access
+switchport access vlan 48
+exit
+do wr
+```
+
+```
+-- Configuración STP (RRVST)
+spanning-tree mode rapid-pvst
+do wr
 ```
 
 ### Área QUICHE
-##### 2960-24TT (SW1)
+#### Switches
+##### 3560-24PS (ESW4)
+```
+-- Configuración modo truncal
+int range fa0/22 - 24
+switchport trunk encapsulation dot1q
+switchport mode trunk
+no shutdown
+exit
+do wr
 ```
 
 ```
+-- Configuración del protocolo
+vtp version 2
+vtp mode server
+vtp domain G13
+vtp password usac
+do wr
+```
+
+```
+-- Creación VLAN
+vlan 18
+name RRHH
+vlan 28
+name CONTABILIDAD
+vlan 38
+name VENTAS
+vlan 48
+name INFORMATICA
+exit
+do wr
+```
+
+```
+-- Configuración VLAN's con STP
+spanning-tree vlan 1 root primary
+spanning-tree vlan 18 root primary
+spanning-tree vlan 28 root primary
+spanning-tree vlan 38 root primary
+spanning-tree vlan 48 root primary
+do wr
+```
+
+```
+-- Configuración VLAN's como Switch Virtual Interface (SVI)
+int vlan 38
+ip address 192.178.13.1 255.255.255.192
+no shutdown
+exit
+do wr
+
+int vlan 48
+ip address 192.178.13.65 255.255.255.224
+no shutdown
+exit
+do wr
+
+int vlan 18
+ip address 192.178.13.97 255.255.255.240
+no shutdown
+exit
+do wr
+
+int vlan 28
+ip address 192.178.13.113 255.255.255.240
+no shutdown
+exit
+do wr
+```
+
+```
+-- Modo Acceso
+--- Asignación VLANS Arbitrariamente
+# PC17
+int fa0/1
+switchport mode access
+switchport access vlan 48
+exit
+do wr
+```
+
+```
+-- Configuración STP (RRVST)
+spanning-tree mode rapid-pvst
+do wr
+```
+
+##### 2960-24TT (SW1)
+```
+-- Configuración modo truncal
+int fa0/24
+switchport mode trunk
+exit
+do wr
+```
+
+```
+-- Conciguración protocolo
+vtp mode client
+vtp domain G13
+vtp password usac
+do wr
+```
+
+```
+-- Modo Acceso
+--- Asignación VLANS Arbitrariamente
+# VPC11
+int fa0/1
+switchport mode access
+switchport access vlan 28
+exit
+do wr
+
+# VPC12
+int fa0/2
+switchport mode access
+switchport access vlan 18
+exit
+do wr
+
+# VPC13
+int fa0/3
+switchport mode access
+switchport access vlan 38
+exit
+do wr
+
+# VPC14
+int fa0/4
+switchport mode access
+switchport access vlan 48
+exit
+do wr
+```
+
+```
+-- Configuración STP (RRVST)
+spanning-tree mode rapid-pvst
+do wr
+```
+
 
 ##### 2960-24TT (SW4)
 ```
-
+-- Configuración modo truncal
+int fa0/24
+switchport mode trunk
+exit
+do wr
 ```
 
-##### 3560-24PS (ESW4)
+```
+-- Conciguración protocolo
+vtp mode client
+vtp domain G13
+vtp password usac
+do wr
 ```
 
 ```
+-- Modo Acceso
+--- Asignación VLANS Arbitrariamente
+# VPC8
+int fa0/1
+switchport mode access
+switchport access vlan 18
+exit
+do wr
+
+# VPC9
+int fa0/2
+switchport mode access
+switchport access vlan 28
+exit
+do wr
+
+# VPC10
+int fa0/3
+switchport mode access
+switchport access vlan 38
+exit
+do wr
+```
+
+```
+-- Configuración STP (RRVST)
+spanning-tree mode rapid-pvst
+do wr
+```
+
+### ÁREA CORE (CONFIGURACIÓN)
+#### ROUTER-PT
+```
+```
+
+##### CENTRAL
+##### JUTIAPA
+##### QUICHE
+##### PETEN
+##### ESCUINTLA
+##### IZABAL

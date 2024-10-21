@@ -20,8 +20,8 @@
 
 |     CARPETA     |   MD   | Fecha Entrega | Prorroga |
 | :-------------: | :----: | :-----------: | :------: |
-| [Proyecto 1](./Proyectos/Proyecto1/) | [View](./Proyectos/Proyecto1/) |      07/Septiembre      |   ---   |
-| [Proyecto 2](./Proyectos/Proyecto2) | [View](.) |      ---      |   ---   |
+| [Proyecto 1](./Proyectos/Proyecto1) | [View](./Proyectos/Proyecto1/) |      07/Septiembre      |   ---   |
+| [Proyecto 2](./Proyectos/Proyecto2) | [View](./Proyectos/Proyecto2/) |      25/Octubre      |   ---   |
 | [Proyecto 3](./Proyectos/Proyecto3) | [View](.) |      ---      |   ---   |
 
 ### Enunciados
@@ -59,13 +59,13 @@
         </tr>
         <tr>
             <td rowspan=3 align="center">Proyectos</td>
-            <td rowspan=1 align="center"><a href="./Enunciados/Proyectos/">Proyecto 1</a></td>
+            <td rowspan=1 align="center"><a href="./Enunciados/Proyectos/[Redes1]P1.pdf">Proyecto 1</a></td>
             <td align="center">07/Septiembre</td>
             <td align="center">---</td>
         </tr>
         <tr>
-            <td rowspan=1 align="center"><a href="./Enunciados/Proyectos/">Proyecto 2</a></td>
-            <td align="center">---</td>
+            <td rowspan=1 align="center"><a href="./Enunciados/Proyectos/[Redes1]P2.pdf">Proyecto 2</a></td>
+            <td align="center">25/Octubre</td>
             <td align="center">---</td>
         </tr>
         <tr>

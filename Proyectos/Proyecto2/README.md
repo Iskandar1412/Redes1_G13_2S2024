@@ -868,11 +868,61 @@ do wr -- puede ser end -> do copy running-config startup config
 #### Switches
 ##### 2960-24TT (Switch2)
 ```
+-- Creación VLAN's
+vlan 58
+name DB_SERVER
+vlan 68
+name MANAGEMENT_SERVER
+vlan 78
+name FILE_SERVER
+exit
+do wr
 
+-- Asignación VLAN's
+# SPDB (VLAN 58)
+int fa0/1
+switchport mode access
+switchport access vlan 58
+exit
+do wr
+
+# SP-M (VLAN 68)
+int fa0/2
+switchport mode access
+switchport access vlan 68
+exit
+do wr
+
+# SP-FS (VLAN 78)
+int fa0/3
+switchport mode access
+switchport access vlan 78
+exit
+do wr
+
+-- Envio VLAN's a Firewall
+int gi0/1
+switchport mode trunk
+switchport trunk allowed vlan 1,58,68,78
+no shut
+exit
+do wr
+```
+
+```
+-- Configuración STP (RRVST)
+spanning-tree mode rapid-pvst
+do wr
 ```
 
 #### 5506-X (ASA0)
 
+```
+
+```
+
+#### Router
+##### Router-PT (CENTRAL)
 ```
 
 ```
@@ -1797,13 +1847,6 @@ ip address 10.0.0.33 255.255.255.248
 no shut
 exit
 do wr
-
-# QUICHE
-int gi4/0
-ip address 10.0.0.41 255.255.255.248
-no shut
-exit
-do wr
 ```
 
 ##### JUTIAPA
@@ -1848,13 +1891,6 @@ do wr
 ##### QUICHE
 ```
 -- Configuración puertos y Máscara
-# ESW4
-int fa0/0
-ip address 10.0.0.97 255.255.255.248
-no shut
-exit
-do wr
-
 # ESCUINTLA
 int fa5/0
 ip address 10.0.0.105 255.255.255.248
@@ -1894,13 +1930,6 @@ do wr
 ##### PETEN
 ```
 -- Configuración puertos y Máscara
-# ESW2
-int fa0/0
-ip address 10.0.1.129 255.255.255.248
-no shut
-exit
-do wr
-
 # JUTIAPA
 int fa5/0
 ip address 10.0.1.66 255.255.255.248
@@ -1940,13 +1969,6 @@ do wr
 ##### ESCUINTLA
 ```
 -- Configuración puertos y Máscara
-# SW5
-int fa0/0
-ip address 10.0.1.153 255.255.255.248
-no shut
-exit
-do wr
-
 # QUICHE
 int fa5/0
 ip address 10.0.1.106 255.255.255.248
@@ -1986,13 +2008,6 @@ do wr
 ##### IZABAL
 ```
 -- Configuración puertos y Máscara
-# ESW3
-int fa0/0
-ip address 10.0.0.169 255.255.255.248
-no shut
-exit
-do wr
-
 # CENTRAL
 int fa5/0
 ip address 10.0.0.2 255.255.255.248

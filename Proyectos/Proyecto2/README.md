@@ -1384,6 +1384,41 @@ spanning-tree mode rapid-pvst
 do wr
 ```
 
+#### Router
+##### Router-PT (IZABAL)
+```
+-- Leventar interfaz
+int fa0/0
+no shut
+exit
+do wr
+
+-- Configuración Subredes
+# VLAN 38
+int fa0/0.38
+encapsulation dot1q 38
+ip address 192.167.13.1 255.255.255.224
+no shut
+exit
+do wr
+
+# VLAN 18
+int fa0/0.18
+encapsulation dot1q 18
+ip address 192.167.13.33 255.255.255.240
+no shut
+exit
+do wr
+
+# VLAN 28
+int fa0/0.28
+encapsulation dot1q 28
+ip address 192.167.13.49 255.255.255.248
+no shut
+exit
+do wr
+```
+
 ### Área PETÉN
 #### Switches
 ##### 3560-24PS (ESW2)

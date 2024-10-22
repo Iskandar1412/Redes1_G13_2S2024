@@ -1715,6 +1715,49 @@ spanning-tree mode rapid-pvst
 do wr
 ```
 
+#### Router
+##### Router-PT (QUICHE)
+```
+-- Leventar interfaz
+int fa0/0
+no shut
+exit
+do wr
+
+-- Configuración Subredes
+# VLAN 38
+int fa0/0.38
+encapsulation dot1q 38
+ip address 192.178.13.1 255.255.255.192
+no shut
+exit
+do wr
+
+# VLAN 48
+int fa0/0.48
+encapsulation dot1q 48
+ip address 192.178.13.65 255.255.255.224
+no shut
+exit
+do wr
+
+# VLAN 18
+int fa0/0.18
+encapsulation dot1q 18
+ip address 192.178.13.97 255.255.255.240
+no shut
+exit
+do wr
+
+# VLAN 28
+int fa0/0.28
+encapsulation dot1q 28
+ip address 192.178.13.113 255.255.255.240
+no shut
+exit
+do wr
+```
+
 ### ÁREA CORE (CONFIGURACIÓN)
 #### ROUTER-PT
 ##### CENTRAL

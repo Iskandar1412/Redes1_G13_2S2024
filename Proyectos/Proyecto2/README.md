@@ -800,8 +800,8 @@ Se pondra máscará para todos los equipos /29 y esa ba definido por cada router
 8-15
 | Interfaz          | IP Red    | Máscara Red     |
 | :---              | :---      | :---:           |
-| fa0/0 (J2)        | 10.0.0.X  | 255.255.255.248 |
-| fa1/0 (J1)        | 10.0.0.X  | 255.255.255.248 |
+| fa0/0 (J2)        | 11.0.0.6  | 255.255.255.252 |
+| fa1/0 (J1)        | 11.0.0.2  | 255.255.255.252 |
 | fa5/0 (PETEN)     | 10.0.0.41 | 255.255.255.248 |
 | fa6/0 (IZABAL)    | 10.0.0.49 | 255.255.255.248 |
 | fa7/0 (QUICHE)    | 10.0.0.57 | 255.255.255.248 |
@@ -1060,7 +1060,6 @@ do wr
 ```
 -- HSRP
 int fa1/0
-ip address 192.168.13.2 255.255.255.0
 standby 10 ip 192.168.13.1
 standby 10 priority 110
 standby 10 preempt
@@ -1130,7 +1129,6 @@ do wr
 ```
 -- HSRP
 int fa1/0
-ip address 192.168.13.3 255.255.255.0
 standby 10 ip 192.168.13.1
 standby 10 priority 100
 standby 10 preempt
@@ -1268,6 +1266,33 @@ do wr
 -- Configuración STP (RPVST)
 spanning-tree mode rapid-pvst
 exit
+```
+
+#### Router
+##### Router-PT (ESCUINTLA)
+```
+-- Leventar interfaz
+int fa0/0
+no shut
+exit
+do wr
+
+-- Configuración Subredes
+# VLAN 38
+int fa0/0.38
+encapsulation dot1q 38
+ip address 192.148.13.1 255.255.255.224
+no shut
+exit
+do wr
+
+# VLAN 18
+int fa0/0.18
+encapsulation dot1q 18
+ip address 192.148.13.33 255.255.255.248
+no shut
+exit
+do wr
 ```
 
 ### Área IZABAL

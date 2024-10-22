@@ -1070,15 +1070,60 @@ do wr
 ```
 
 ```
+-- Configuración Subredes
+# VLAN 38
+int fa1/0.38
+encapsulation dot1q 38
+ip address 192.168.13.1 255.255.255.224
+no shut
+exit
+do wr
+
+# VLAN 48
+int fa1/0.48
+encapsulation dot1q 48
+ip address 192.168.13.33 255.255.255.240
+no shut
+exit
+do wr
+
+# VLAN 18
+int fa1/0.18
+encapsulation dot1q 18
+ip address 192.168.13.49 255.255.255.240
+no shut
+exit
+do wr
+
+# VLAN 28
+int fa1/0.28
+encapsulation dot1q 28
+ip address 192.168.13.65 255.255.255.248
+no shut
+exit
+do wr
+```
+
+```
 -- Configuración de IP y Máscara en cada puerto correspondiente
 int fa0/0
 ip address 11.0.0.1 255.255.255.252
 no shut
 exit
 do wr
--- EL DE JUTIAPA DEBERIA DAR ALGO ASI 
-int fa(que da a J1)
-ip address 11.0.0.2 255.255.255.252
+```
+
+```
+-- Protocolo RIP
+router rip
+network 192.168.13.0
+network 192.168.13.32
+network 192.168.13.48
+network 192.168.13.64
+network 11.0.0.0
+no auto-summary
+exit
+do wr
 ```
 
 ##### Router-PT (J2)
@@ -1095,16 +1140,90 @@ do wr
 ```
 
 ```
+-- Configuración Subredes
+# VLAN 38
+int fa1/0.38
+encapsulation dot1q 38
+ip address 192.168.13.1 255.255.255.224
+no shut
+exit
+do wr
+
+# VLAN 48
+int fa1/0.48
+encapsulation dot1q 48
+ip address 192.168.13.33 255.255.255.240
+no shut
+exit
+do wr
+
+# VLAN 18
+int fa1/0.18
+encapsulation dot1q 18
+ip address 192.168.13.49 255.255.255.240
+no shut
+exit
+do wr
+
+# VLAN 28
+int fa1/0.28
+encapsulation dot1q 28
+ip address 192.168.13.65 255.255.255.248
+no shut
+exit
+do wr
+```
+
+```
 -- Configuración de IP y Máscara en cada puerto correspondiente
 int fa0/0
 ip address 11.0.0.5 255.255.255.252
 no shut
 exit
 do wr
--- EL DE JUTIAPA DEBERIA DAR ALGO ASI 
-int fa(que da a J2)
-ip address 11.0.0.6 255.255.255.252
 ```
+
+```
+-- Protocolo RIP
+router rip
+network 192.168.13.0
+network 192.168.13.32
+network 192.168.13.48
+network 192.168.13.64
+network 11.0.0.4
+no auto-summary
+exit
+do wr
+```
+
+##### Router-PT (JUTIAPA)
+```
+-- Configuración puertos y Máscara
+# J2
+int fa0/0
+ip address 11.0.0.6 255.255.255.252
+no shut
+exit
+do wr
+
+# J1
+int fa1/0
+ip address 11.0.0.2 255.255.255.252
+no shut
+exit
+do wr
+```
+
+```
+-- Protocolo RIP
+router rip
+network 11.0.0.0
+network 11.0.0.4
+no auto-summary
+exit
+do wr
+```
+
 
 ### Área ESCUINTLA
 #### Switches
@@ -1552,20 +1671,6 @@ do wr
 ##### JUTIAPA
 ```
 -- Configuración puertos y Máscara
-# J2
-int fa0/0
-ip address 10.0.0.49 255.255.255.248
-no shut
-exit
-do wr
-
-# J1
-int fa1/0
-ip address 10.0.0.57 255.255.255.248
-no shut
-exit
-do wr
-
 # PETEN
 int fa5/0
 ip address 10.0.0.65 255.255.255.248

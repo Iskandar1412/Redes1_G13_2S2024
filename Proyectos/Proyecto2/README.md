@@ -1515,6 +1515,41 @@ spanning-tree mode rapid-pvst
 do wr
 ```
 
+#### Router
+##### Router-PT (PETEN)
+```
+-- Leventar interfaz
+int fa0/0
+no shut
+exit
+do wr
+
+-- Configuración Subredes
+# VLAN 38
+int fa0/0.38
+encapsulation dot1q 38
+ip address 192.158.13.1 255.255.255.224
+no shut
+exit
+do wr
+
+# VLAN 48
+int fa0/0.48
+encapsulation dot1q 48
+ip address 192.158.13.33 255.255.255.224
+no shut
+exit
+do wr
+
+# VLAN 18
+int fa0/0.18
+encapsulation dot1q 18
+ip address 192.158.13.65 255.255.255.240
+no shut
+exit
+do wr
+```
+
 ### Área QUICHE
 #### Switches
 ##### 3560-24PS (ESW4)

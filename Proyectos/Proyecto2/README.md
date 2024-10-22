@@ -1278,6 +1278,8 @@ int fa0/24
 switchport trunk encapsulation dot1q
 switchport mode trunk
 switchport trunk allowed vlan 1,18,38,48
+exit
+do wr
 ```
 
 ```

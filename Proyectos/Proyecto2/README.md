@@ -1108,22 +1108,14 @@ do wr
 #### Router
 ##### Router-PT (J1)
 ```
--- HSRP
-int fa1/0
-standby 10 ip 192.168.13.1
-standby 10 priority 110
-standby 10 preempt
-no shutdown
-exit
-do wr
-```
-
-```
 -- Configuración Subredes
 # VLAN 38
 int fa1/0.38
 encapsulation dot1q 38
 ip address 192.168.13.1 255.255.255.224
+standby 10 ip 192.168.13.2
+standby 10 priority 110
+standby 10 preempt
 no shut
 exit
 do wr
@@ -1156,7 +1148,10 @@ do wr
 ```
 -- Configuración de IP y Máscara en cada puerto correspondiente
 int fa0/0
-ip address 11.0.0.1 255.255.255.252
+ip address 11.0.0.1 255.255.255.0
+standby 20 ip 11.0.0.3
+standby 20 priority 110
+standby 20 preempt
 no shut
 exit
 do wr
@@ -1165,6 +1160,8 @@ do wr
 ```
 -- Protocolo RIP
 router rip
+no auto-summary
+version 2
 network 192.168.13.0
 network 192.168.13.32
 network 192.168.13.48
@@ -1177,22 +1174,14 @@ do wr
 
 ##### Router-PT (J2)
 ```
--- HSRP
-int fa1/0
-standby 10 ip 192.168.13.1
-standby 10 priority 100
-standby 10 preempt
-no shutdown
-exit
-do wr
-```
-
-```
 -- Configuración Subredes
 # VLAN 38
 int fa1/0.38
 encapsulation dot1q 38
 ip address 192.168.13.1 255.255.255.224
+standby 10 ip 192.168.13.2
+standby 10 priority 100
+standby 10 preempt
 no shut
 exit
 do wr
@@ -1225,7 +1214,10 @@ do wr
 ```
 -- Configuración de IP y Máscara en cada puerto correspondiente
 int fa0/0
-ip address 11.0.0.5 255.255.255.252
+ip address 11.0.0.2 255.255.255.0
+standby 20 ip 11.0.0.3
+standby 20 priority 100
+standby 20 preempt
 no shut
 exit
 do wr
@@ -1234,6 +1226,8 @@ do wr
 ```
 -- Protocolo RIP
 router rip
+no auto-summary
+version 2
 network 192.168.13.0
 network 192.168.13.32
 network 192.168.13.48
@@ -1264,6 +1258,7 @@ do wr
 
 ```
 -- Protocolo RIP
+no auto-summary
 router rip
 network 11.0.0.0
 network 11.0.0.4
@@ -1271,7 +1266,6 @@ no auto-summary
 exit
 do wr
 ```
-
 
 ### Área ESCUINTLA
 #### Switches
@@ -1849,33 +1843,45 @@ exit
 do wr
 ```
 
+```
+-- Protocolo OSPF
+router ospf 1
+network 10.0.0.32 0.0.0.7 area 0
+network 10.0.0.8 0.0.0.7 area 0
+network 10.0.0.0 0.0.0.7 area 0
+network 10.0.0.16 0.0.0.7 area 0
+network 10.0.0.24 0.0.0.7 area 0
+exit
+do wr
+```
+
 ##### JUTIAPA
 ```
 -- Configuración puertos y Máscara
 # PETEN
 int fa5/0
-ip address 10.0.0.65 255.255.255.248
+ip address 10.0.0.41 255.255.255.248
 no shut
 exit
 do wr
 
 # IZABAL
 int fa6/0
-ip address 10.0.0.73 255.255.255.248
+ip address 10.0.0.49 255.255.255.248
 no shut
 exit
 do wr
 
 # QUICHE
 int fa7/0
-ip address 10.0.0.81 255.255.255.248
+ip address 10.0.0.57 255.255.255.248
 no shut
 exit
 do wr
 
 # ESCUINTLA
 int fa8/0
-ip address 10.0.0.89 255.255.255.248
+ip address 10.0.0.65 255.255.255.248
 no shut
 exit
 do wr
@@ -1888,41 +1894,105 @@ exit
 do wr
 ```
 
+```
+-- Protocolo RIP
+router rip
+no auto-summary
+version 2
+network 10.0.0.64
+no auto-summary
+exit
+do wr
+```
+
+```
+-- Protocolo OSPF
+router ospf 1
+network 10.0.0.24 0.0.0.7 area 0
+network 10.0.0.56 0.0.0.7 area 0
+network 10.0.0.40 0.0.0.7 area 0
+network 10.0.0.48 0.0.0.7 area 0
+redistribute rip subnets
+exit
+do wr
+```
+
+```
+-- Conexión con OSPF
+router rip
+redistribute ospf 1
+redistribute connected
+exit
+do wr
+```
+
 ##### QUICHE
 ```
 -- Configuración puertos y Máscara
 # ESCUINTLA
 int fa5/0
-ip address 10.0.0.105 255.255.255.248
+ip address 10.0.0.73 255.255.255.248
 no shut
 exit
 do wr
 
 # IZABAL
 int fa6/0
-ip address 10.0.1.113 255.255.255.248
+ip address 10.0.0.81 255.255.255.248
 no shut
 exit
 do wr
 
 # JUTIAPA
 int fa7/0
-ip address 10.0.1.82 255.255.255.248
+ip address 10.0.0.58 255.255.255.248
 no shut
 exit
 do wr
 
 # PETEN
 int fa8/0
-ip address 10.0.1.121 255.255.255.248
+ip address 10.0.0.89 255.255.255.248
 no shut
 exit
 do wr
 
 # CENTRAL
 int fa9/0
-ip address 10.0.1.34 255.255.255.248
+ip address 10.0.0.34 255.255.255.248
 no shut
+exit
+do wr
+```
+
+```
+-- Protocolo EIGRP
+router eigrp 1
+no auto-summary
+network 10.0.0.88 0.0.0.7
+network 10.0.0.80 0.0.0.7
+network 192.178.13.0 0.0.0.255
+no auto-summary
+exit
+do wr
+```
+```
+-- Protocolo OSPF
+router ospf 1
+network 10.0.0.32 0.0.0.7 area 0
+network 10.0.0.56 0.0.0.7 area 0
+network 10.0.0.72 0.0.0.7 area 0
+redistribute connected subnets 
+redistribute eigrp 1 subnets 
+exit
+do wr
+```
+
+```
+-- Conexión con OSPF
+router eigrp 1
+redistribute ospf 1
+redistribute connected
 exit
 do wr
 ```
@@ -1932,36 +2002,69 @@ do wr
 -- Configuración puertos y Máscara
 # JUTIAPA
 int fa5/0
-ip address 10.0.1.66 255.255.255.248
+ip address 10.0.0.42 255.255.255.248
 no shut
 exit
 do wr
 
 # CENTRAL
 int fa6/0
-ip address 10.0.1.10 255.255.255.248
+ip address 10.0.0.10 255.255.255.248
 no shut
 exit
 do wr
 
 # ESCUINTLA
 int fa7/0
-ip address 10.0.1.137 255.255.255.248
+ip address 10.0.0.97 255.255.255.248
 no shut
 exit
 do wr
 
 # QUICHE
 int fa8/0
-ip address 10.0.1.122 255.255.255.248
+ip address 10.0.0.90 255.255.255.248
 no shut
 exit
 do wr
 
 # IZABAL
 int fa9/0
-ip address 10.0.1.145 255.255.255.248
+ip address 10.0.0.105 255.255.255.248
 no shut
+exit
+do wr
+```
+
+```
+-- Protocolo EIGRP
+router eigrp 1
+no auto-summary
+network 10.0.0.88 0.0.0.7
+network 10.0.0.104 0.0.0.7
+network 192.158.13.0 0.0.0.255
+no auto-summary
+exit
+do wr
+```
+
+```
+-- Protocolo OSPF
+router ospf 1
+network 10.0.0.96 0.0.0.7 area 0
+network 10.0.0.40 0.0.0.7 area 0
+network 10.0.0.8 0.0.0.7 area 0
+redistribute connected subnets 
+redistribute eigrp 1 subnets 
+exit
+do wr
+```
+
+```
+-- Conexión con OSPF
+router eigrp 1
+redistribute ospf 1
+redistribute connected
 exit
 do wr
 ```
@@ -1971,36 +2074,69 @@ do wr
 -- Configuración puertos y Máscara
 # QUICHE
 int fa5/0
-ip address 10.0.1.106 255.255.255.248
+ip address 10.0.0.74 255.255.255.248
 no shut
 exit
 do wr
 
 # CENTRAL
 int fa6/0
-ip address 10.0.1.18 255.255.255.248
+ip address 10.0.0.18 255.255.255.248
 no shut
 exit
 do wr
 
 # PETEN
 int fa7/0
-ip address 10.0.1.138 255.255.255.248
+ip address 10.0.0.98 255.255.255.248
 no shut
 exit
 do wr
 
 # JUTIAPA
 int fa8/0
-ip address 10.0.1.90 255.255.255.248
+ip address 10.0.0.66 255.255.255.248
 no shut
 exit
 do wr
 
 # IZABAL
 int fa9/0
-ip address 10.0.2.161 255.255.255.248
+ip address 10.0.0.113 255.255.255.248
 no shut
+exit
+do wr
+```
+
+```
+-- Protocolo RIP
+router rip
+no auto-summary
+version 2
+network 10.0.0.64
+network 192.148.13.0
+no auto-summary
+exit
+do wr
+```
+
+```
+-- Protocolo OSPF
+router ospf 1
+network 10.0.0.112 0.0.0.7 area 0
+network 10.0.0.96 0.0.0.7 area 0
+network 10.0.0.72 0.0.0.7 area 0
+network 10.0.0.16 0.0.0.7 area 0
+redistribute rip subnets
+exit
+do wr
+```
+
+```
+-- Conexión con OSPF
+router rip
+redistribute ospf 1
+redistribute connected
 exit
 do wr
 ```
@@ -2017,29 +2153,62 @@ do wr
 
 # JUTIAPA
 int fa6/0
-ip address 10.0.0.74 255.255.255.248
+ip address 10.0.0.50 255.255.255.248
 no shut
 exit
 do wr
 
 # QUICHE
 int fa7/0
-ip address 10.0.0.114 255.255.255.248
+ip address 10.0.0.82 255.255.255.248
 no shut
 exit
 do wr
 
 # PETEN
 int fa8/0
-ip address 10.0.0.146 255.255.255.248
+ip address 10.0.0.106 255.255.255.248
 no shut
 exit
 do wr
 
 # ESCUINTLA
 int fa9/0
-ip address 10.0.0.162 255.255.255.248
+ip address 10.0.0.114 255.255.255.248
 no shut
+exit
+do wr
+```
+
+```
+-- Protocolo EIGRP
+router eigrp 1
+no auto-summary
+network 10.0.0.104 0.0.0.7
+network 10.0.0.80 0.0.0.7
+network 192.167.13.0 0.0.0.255
+no auto-summary
+exit
+do wr
+```
+
+```
+-- Protocolo OSPF
+router ospf 1
+network 10.0.0.0 0.0.0.7 area 0
+network 10.0.0.48 0.0.0.7 area 0
+network 10.0.0.112 0.0.0.7 area 0
+redistribute connected subnets 
+redistribute eigrp 1 subnets 
+exit
+do wr
+```
+
+```
+-- Conexión con OSPF
+router eigrp 1
+redistribute ospf 1
+redistribute connected
 exit
 do wr
 ```

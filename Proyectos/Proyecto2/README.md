@@ -783,83 +783,74 @@ Grupo 13 (192.167.13.0/24)
 | Contabilidad | 28         | 5       | 255.255.255.248 | 0.0.0.7  | 192.167.13.48 | 192.167.13.49 | 192.167.13.54 | 192.167.13.55 |
 
 ## FLSM Obtenidos (Cálculo)
+Se pondra máscará para todos los equipos /29 y esa ba definido por cada router que cada uno es una subred (255.255.255.240)
 
-Para el cálculo de FLSM se han considerado 16 (14 utilizables) hosts por subred
-
-PACKET TRACER<br/>
-Router (Router-PT)<br/>
-Switch Capa 3 (3560-24PS) (CENTRAL, JUTIAPA, QUICHE, PETEN, ESCUINTLA, IZABAL, J1, J2, ESW1, ESW2, ESW4, ESW3)<br/>
-Switch Capa 2 (2960-24TT) (SW5)<br/>
-ASA0 (5506-X)
-
-Se pondra máscará para todos los equipos /28 y esa ba definido por cada router que cada uno es una subred (255.255.255.240)
-
-### Router Central
-0-15
-| Interfaz          | IP Red   | Máscara Red     |
-| :---              | :---     | :---:           |
-| fa5/0 (IZABAL)    | 10.0.0.1 | 255.255.255.240 |
-| fa6/0 (PETEN)     | 10.0.0.2 | 255.255.255.240 |
-| fa7/0 (ESCUINTLA) | 10.0.0.3 | 255.255.255.240 |
-| fa8/0 (JUTIAPA)   | 10.0.0.4 | 255.255.255.240 |
-| fa9/0 (QUICHE)    | 10.0.0.5 | 255.255.255.240 |
-| gi4/0 (ASA0)      | 10.0.0.6 | 255.255.255.240 |
+### Router CENTRAL
+0-7
+| Interfaz          | IP Red    | Máscara Red     |
+| :---              | :---      | :---:           |
+| fa5/0 (IZABAL)    | 10.0.0.1  | 255.255.255.248 |
+| fa6/0 (PETEN)     | 10.0.0.9  | 255.255.255.248 |
+| fa7/0 (ESCUINTLA) | 10.0.0.17 | 255.255.255.248 | 
+| fa8/0 (JUTIAPA)   | 10.0.0.25 | 255.255.255.248 |
+| fa9/0 (QUICHE)    | 10.0.0.33 | 255.255.255.248 |
+| gi4/0 (ASA0)      | 10.0.0.X  | 255.255.255.248 |
 
 ### Router JUTIAPA
-16-31
-| Interfaz          | IP Red   | Máscara Red      |
-| :---              | :---     | :---:            |
-| fa0/0 (J2)        | 10.0.0.17 | 255.255.255.240 |
-| fa1/0 (J1)        | 10.0.0.18 | 255.255.255.240 |
-| fa5/0 (PETEN)     | 10.0.0.19 | 255.255.255.240 |
-| fa6/0 (IZABAL)    | 10.0.0.20 | 255.255.255.240 |
-| fa7/0 (QUICHE)    | 10.0.0.21 | 255.255.255.240 |
-| fa8/0 (ESCUINTLA) | 10.0.0.22 | 255.255.255.240 |
-| fa9/0 (CENTRAL)   | 10.0.0.23 | 255.255.255.240 |
+8-15
+| Interfaz          | IP Red    | Máscara Red     |
+| :---              | :---      | :---:           |
+| fa0/0 (J2)        | 11.0.0.6  | 255.255.255.252 |
+| fa1/0 (J1)        | 11.0.0.2  | 255.255.255.252 |
+| fa5/0 (PETEN)     | 10.0.0.41 | 255.255.255.248 |
+| fa6/0 (IZABAL)    | 10.0.0.49 | 255.255.255.248 |
+| fa7/0 (QUICHE)    | 10.0.0.57 | 255.255.255.248 |
+| fa8/0 (ESCUINTLA) | 10.0.0.65 | 255.255.255.248 |
+| fa9/0 (CENTRAL)   | 10.0.0.26 | 255.255.255.248 |
 
 ### Router QUICHE
-32-47
-| Interfaz          | IP Red    | Máscara Red     |
-| :---              | :---      | :---:           |
-| fa1/0 (ESW4)      | 10.0.0.33 | 255.255.255.240 |
-| fa5/0 (ESCUINTLA) | 10.0.0.34 | 255.255.255.240 |
-| fa6/0 (IZABAL)    | 10.0.1.35 | 255.255.255.240 |
-| fa7/0 (JUTIAPA)   | 10.0.1.36 | 255.255.255.240 |
-| fa8/0 (PETEN)     | 10.0.1.37 | 255.255.255.240 |
-| fa9/0 (CENTRAL)   | 10.0.1.38 | 255.255.255.240 |
+16-23
+| Interfaz          | IP Red       | Máscara Red     |
+| :---              | :---         | :---:           |
+| fa0/0 (ESW4)      | 192.178.13.1 | 255.255.255.0   |
+| fa5/0 (ESCUINTLA) | 10.0.0.73    | 255.255.255.248 |
+| fa6/0 (IZABAL)    | 10.0.0.81    | 255.255.255.248 |
+| fa7/0 (JUTIAPA)   | 10.0.0.58    | 255.255.255.248 |
+| fa8/0 (PETEN)     | 10.0.0.89    | 255.255.255.248 |
+| fa9/0 (CENTRAL)   | 10.0.0.34    | 255.255.255.248 |
 
 ### Router PETEN
-48-63
-| Interfaz          | IP Red    | Máscara Red     |
-| :---              | :---      | :---:           |
-| fa1/0 (ESW2)      | 10.0.1.49 | 255.255.255.240 |
-| fa5/0 (JUTIAPA)   | 10.0.1.50 | 255.255.255.240 |
-| fa6/0 (CENTRAL)   | 10.0.1.51 | 255.255.255.240 |
-| fa7/0 (ESCUINTLA) | 10.0.1.52 | 255.255.255.240 |
-| fa8/0 (QUICHE)    | 10.0.1.53 | 255.255.255.240 |
-| fa9/0 (IZABAL)    | 10.0.1.54 | 255.255.255.240 |
+24-31
+| Interfaz          | IP Red       | Máscara Red     |
+| :---              | :---         | :---:           |
+| fa0/0 (ESW2)      | 192.158.13.1 | 255.255.255.0   |
+| fa5/0 (JUTIAPA)   | 10.0.0.42    | 255.255.255.248 |
+| fa6/0 (CENTRAL)   | 10.0.0.10    | 255.255.255.248 |
+| fa7/0 (ESCUINTLA) | 10.0.0.97    | 255.255.255.248 |
+| fa8/0 (QUICHE)    | 10.0.0.90    | 255.255.255.248 |
+| fa9/0 (IZABAL)    | 10.0.0.105   | 255.255.255.248 |
 
 ### Router ESCUINTLA
-64-79
-| Interfaz          | IP Red    | Máscara Red     |
-| :---              | :---      | :---:           |
-| fa1/0 (SW5)       | 10.0.1.65 | 255.255.255.240 |
-| fa5/0 (QUICHE)    | 10.0.1.66 | 255.255.255.240 |
-| fa6/0 (CENTRAL)   | 10.0.1.67 | 255.255.255.240 |
-| fa7/0 (PETEN)     | 10.0.1.68 | 255.255.255.240 |
-| fa8/0 (JUTIAPA)   | 10.0.1.69 | 255.255.255.240 |
-| fa9/0 (IZABAL)    | 10.0.2.70 | 255.255.255.240 |
+32-39
+| Interfaz          | IP Red       | Máscara Red     |
+| :---              | :---         | :---:           |
+| fa0/0 (SW5)       | 192.148.13.1 | 255.255.255.0   |
+| fa5/0 (QUICHE)    | 10.0.0.74    | 255.255.255.248 |
+| fa6/0 (CENTRAL)   | 10.0.0.18    | 255.255.255.248 |
+| fa7/0 (PETEN)     | 10.0.0.98    | 255.255.255.248 |
+| fa8/0 (JUTIAPA)   | 10.0.0.66    | 255.255.255.248 |
+| fa9/0 (IZABAL)    | 10.0.0.113   | 255.255.255.248 |
 
 ### Router IZABAL
-80-95
-| Interfaz          | IP Red    | Máscara Red     |
-| :---              | :---      | :---:           |
-| fa1/0 (ESW3)      | 10.0.0.81 | 255.255.255.240 |
-| fa5/0 (CENTRAL)   | 10.0.0.82 | 255.255.255.240 |
-| fa6/0 (JUTIAPA)   | 10.0.0.83 | 255.255.255.240 |
-| fa7/0 (QUICHE)    | 10.0.0.84 | 255.255.255.240 |
-| fa8/0 (PETEN)     | 10.0.0.85 | 255.255.255.240 |
-| fa9/0 (ESCUINTLA) | 10.0.0.86 | 255.255.255.240 |
+40-47
+| Interfaz          | IP Red       | Máscara Red     |
+| :---              | :---         | :---:           |
+| fa0/0 (ESW3)      | 192.167.13.1 | 255.255.255.0   |
+| fa5/0 (CENTRAL)   | 10.0.0.2     | 255.255.255.248 |
+| fa6/0 (JUTIAPA)   | 10.0.0.50    | 255.255.255.248 |
+| fa7/0 (QUICHE)    | 10.0.0.82    | 255.255.255.248 |
+| fa8/0 (PETEN)     | 10.0.0.106   | 255.255.255.248 |
+| fa9/0 (ESCUINTLA) | 10.0.0.114   | 255.255.255.248 |
 
 ## Configuraciones Router
 
@@ -877,33 +868,51 @@ do wr -- puede ser end -> do copy running-config startup config
 #### Switches
 ##### 2960-24TT (Switch2)
 ```
+-- Creación VLAN's
+vlan 58
+name DB_SERVER
+vlan 68
+name MANAGEMENT_SERVER
+vlan 78
+name FILE_SERVER
+exit
+do wr
 
+-- Asignación VLAN's
+# SPDB (VLAN 58)
+int fa0/1
+switchport mode access
+switchport access vlan 58
+exit
+do wr
+
+# SP-M (VLAN 68)
+int fa0/2
+switchport mode access
+switchport access vlan 68
+exit
+do wr
+
+# SP-FS (VLAN 78)
+int fa0/3
+switchport mode access
+switchport access vlan 78
+exit
+do wr
+
+-- Envio VLAN's a Firewall
+int gi0/1
+switchport mode trunk
+switchport trunk allowed vlan 1,58,68,78
+no shut
+exit
+do wr
 ```
 
-#### ROUTER
-##### ROUTER-PT (CENTRAL)
-
 ```
-
-```
-
-#### Server-PT
-##### SPDP
-
-```
-
-```
-
-##### SP-M
-
-```
-
-```
-
-##### SP-FS
-
-```
-
+-- Configuración STP (RRVST)
+spanning-tree mode rapid-pvst
+do wr
 ```
 
 #### 5506-X (ASA0)
@@ -912,73 +921,15 @@ do wr -- puede ser end -> do copy running-config startup config
 
 ```
 
-### Área JUTIAPA
-
 #### Router
-##### Router-PT (J1)
-```
--- HSRP
-int fa1/0
-standby 10 ip 192.168.13.1
-standby 10 priority 150
-standby 10 preempt
-no shutdown
-exit
-do wr
+##### Router-PT (CENTRAL)
 ```
 
 ```
--- Configuración de IP y Máscara en cada puerto correspondiente
-int fa0/0
-ip address 11.0.0.1 255.255.255.0
-no shut
-exit
-do wr
-```
 
-##### Router-PT (J2)
-```
--- HSRP
-int fa1/0
-standby 10 ip 192.168.13.1
-standby 10 priority 100
-standby 10 preempt
-no shutdown
-exit
-do wr
-```
-
-```
--- Configuración de IP y Máscara en cada puerto correspondiente
-int fa0/0
-ip address 11.0.0.2 255.255.255.0
-no shut
-exit
-do wr
-```
-
-
+### Área JUTIAPA
 #### Switches
 ##### 3560-24PS (ESW1)
-```
--- Configuración modo truncal
-int range fa0/21 - 24
-switchport trunk encapsulation dot1q
-switchport mode trunk
-no shutdown
-exit
-do wr
-```
-
-```
--- Configuración del protocolo
-vtp version 2
-vtp mode server
-vtp domain G13
-vtp password usac
-do wr
-```
-
 ```
 -- Creación VLAN
 vlan 18
@@ -994,38 +945,28 @@ do wr
 ```
 
 ```
--- Configuración VLAN's con STP
-spanning-tree vlan 1 root primary
-spanning-tree vlan 18 root primary
-spanning-tree vlan 28 root primary
-spanning-tree vlan 38 root primary
-spanning-tree vlan 48 root primary
+-- Configuración del protocolo
+vtp version 2
+vtp mode server
+vtp domain G13
+vtp password usac
 do wr
 ```
 
 ```
--- Configuración VLAN's como Switch Virtual Interface (SVI)
-int vlan 38
-ip address 192.168.13.1 255.255.255.224
+-- Configuración modo truncal
+int range fa0/21 - 22
+switchport trunk encapsulation dot1q
+switchport mode trunk
 no shutdown
 exit
 do wr
 
-int vlan 48
-ip address 192.168.13.33 255.255.255.240
-no shutdown
-exit
-do wr
-
-int vlan 18
-ip address 192.168.13.49 255.255.255.240
-no shutdown
-exit
-do wr
-
-int vlan 28
-ip address 192.168.13.65 255.255.255.248
-no shutdown
+-- Envio vlans a router
+int range fa0/23 - 24
+switchport trunk encapsulation dot1q
+switchport mode trunk
+switchport trunk allowed vlan 1,18,28,38,48
 exit
 do wr
 ```
@@ -1083,6 +1024,12 @@ do wr
 int range fa0/23 - 24
 channel-protocol lacp
 channel-group 1 mode active
+switchport mode trunk
+no shut
+exit
+
+int port-channel 1
+switchport mode trunk
 no shut
 exit
 do wr 
@@ -1141,6 +1088,12 @@ do wr
 int range fa0/23 - 24
 channel-protocol lacp
 channel-group 1 mode active
+switchport mode trunk
+no shut
+exit
+
+int port-channel 1
+switchport mode trunk
 no shut
 exit
 do wr 
@@ -1152,16 +1105,171 @@ spanning-tree mode rapid-pvst
 do wr
 ```
 
-### Área ESCUINTLA
-#### Switches
-##### 2960-24TT (SW5)
+#### Router
+##### Router-PT (J1)
 ```
--- Configuración modo truncal
-int fa0/24
-switchport mode trunk
+-- Configuración Subredes
+# VLAN 38
+int fa1/0.38
+encapsulation dot1q 38
+ip address 192.168.13.1 255.255.255.224
+standby 10 ip 192.168.13.2
+standby 10 priority 110
+standby 10 preempt
+no shut
+exit
+do wr
+
+# VLAN 48
+int fa1/0.48
+encapsulation dot1q 48
+ip address 192.168.13.33 255.255.255.240
+no shut
+exit
+do wr
+
+# VLAN 18
+int fa1/0.18
+encapsulation dot1q 18
+ip address 192.168.13.49 255.255.255.240
+no shut
+exit
+do wr
+
+# VLAN 28
+int fa1/0.28
+encapsulation dot1q 28
+ip address 192.168.13.65 255.255.255.248
+no shut
 exit
 do wr
 ```
+
+```
+-- Configuración de IP y Máscara en cada puerto correspondiente
+int fa0/0
+ip address 11.0.0.1 255.255.255.0
+standby 20 ip 11.0.0.3
+standby 20 priority 110
+standby 20 preempt
+no shut
+exit
+do wr
+```
+
+```
+-- Protocolo RIP
+router rip
+no auto-summary
+version 2
+network 192.168.13.0
+network 192.168.13.32
+network 192.168.13.48
+network 192.168.13.64
+network 11.0.0.0
+no auto-summary
+exit
+do wr
+```
+
+##### Router-PT (J2)
+```
+-- Configuración Subredes
+# VLAN 38
+int fa1/0.38
+encapsulation dot1q 38
+ip address 192.168.13.1 255.255.255.224
+standby 10 ip 192.168.13.2
+standby 10 priority 100
+standby 10 preempt
+no shut
+exit
+do wr
+
+# VLAN 48
+int fa1/0.48
+encapsulation dot1q 48
+ip address 192.168.13.33 255.255.255.240
+no shut
+exit
+do wr
+
+# VLAN 18
+int fa1/0.18
+encapsulation dot1q 18
+ip address 192.168.13.49 255.255.255.240
+no shut
+exit
+do wr
+
+# VLAN 28
+int fa1/0.28
+encapsulation dot1q 28
+ip address 192.168.13.65 255.255.255.248
+no shut
+exit
+do wr
+```
+
+```
+-- Configuración de IP y Máscara en cada puerto correspondiente
+int fa0/0
+ip address 11.0.0.2 255.255.255.0
+standby 20 ip 11.0.0.3
+standby 20 priority 100
+standby 20 preempt
+no shut
+exit
+do wr
+```
+
+```
+-- Protocolo RIP
+router rip
+no auto-summary
+version 2
+network 192.168.13.0
+network 192.168.13.32
+network 192.168.13.48
+network 192.168.13.64
+network 11.0.0.4
+no auto-summary
+exit
+do wr
+```
+
+##### Router-PT (JUTIAPA)
+```
+-- Configuración puertos y Máscara
+# J2
+int fa0/0
+ip address 11.0.0.6 255.255.255.252
+no shut
+exit
+do wr
+
+# J1
+int fa1/0
+ip address 11.0.0.2 255.255.255.252
+no shut
+exit
+do wr
+```
+
+```
+-- Protocolo RIP
+no auto-summary
+router rip
+network 11.0.0.0
+network 11.0.0.4
+no auto-summary
+exit
+do wr
+```
+
+### Área ESCUINTLA
+#### Switches
+##### 2960-24TT (SW5)
 
 ```
 -- Creación VLAN's
@@ -1169,6 +1277,15 @@ vlan 18
 name RRHH
 vlan 38
 name VENTAS
+exit
+do wr
+```
+
+```
+-- Configuración modo truncal
+int fa0/24
+switchport mode trunk
+switchport trunk allowed vlan 1,18,38
 exit
 do wr
 ```
@@ -1195,15 +1312,44 @@ spanning-tree mode rapid-pvst
 exit
 ```
 
+#### Router
+##### Router-PT (ESCUINTLA)
+```
+-- Leventar interfaz
+int fa0/0
+no shut
+exit
+do wr
+
+-- Configuración Subredes
+# VLAN 38
+int fa0/0.38
+encapsulation dot1q 38
+ip address 192.148.13.1 255.255.255.224
+no shut
+exit
+do wr
+
+# VLAN 18
+int fa0/0.18
+encapsulation dot1q 18
+ip address 192.148.13.33 255.255.255.248
+no shut
+exit
+do wr
+```
+
 ### Área IZABAL
 #### Switches
 ##### 3560-24PS (ESW3)
 ```
--- Configuración modo truncal
-int range fa23 - 24
-switchport trunk encapsulation dot1q
-switchport mode trunk
-no shut
+-- Creación VLAN
+vlan 18
+name RRHH
+vlan 28
+name CONTABILIDAD
+vlan 38
+name VENTAS
 exit
 do wr
 ```
@@ -1218,43 +1364,19 @@ do wr
 ```
 
 ```
--- Creación VLAN
-vlan 18
-name RRHH
-vlan 28
-name CONTABILIDAD
-vlan 38
-name VENTAS
-exit
-do wr
-```
-
-```
--- Configuración VLAN's con STP
-spanning-tree vlan 1 root primary
-spanning-tree vlan 18 root primary
-spanning-tree vlan 28 root primary
-spanning-tree vlan 38 root primary
-do wr
-```
-
-```
--- Configuración VLAN's como Switch Virtual Interface (SVI)
-int vlan 38
-ip address 192.167.13.1 255.255.255.224
+-- Configuración modo truncal
+int fa23
+switchport trunk encapsulation dot1q
+switchport mode trunk
 no shut
 exit
 do wr
 
-int vlan 18
-ip address 192.167.13.33 255.255.255.240
-no shut
-exit
-do wr
-
-int vlan 28
-ip address 192.167.13.49 255.255.255.248
-no shut
+-- Envio vlans a router
+int fa0/24
+switchport tunk encapsulation dot1q
+switchport mode trunk
+switchport trunk allowed vlan 1,18,28,38
 exit
 do wr
 ```
@@ -1285,14 +1407,14 @@ do wr
 ```
 -- Modo Acceso
 --- Asignación VLANS Arbitrariamente
-# VPC15
+# PC15
 int fa0/1
 switchport mode access
 switchport access vlan 18
 exit
 do wr
 
-# VPC16
+# PC16
 int fa0/2
 switchport mode access
 switchport access vlan 38
@@ -1306,15 +1428,52 @@ spanning-tree mode rapid-pvst
 do wr
 ```
 
+#### Router
+##### Router-PT (IZABAL)
+```
+-- Leventar interfaz
+int fa0/0
+no shut
+exit
+do wr
+
+-- Configuración Subredes
+# VLAN 38
+int fa0/0.38
+encapsulation dot1q 38
+ip address 192.167.13.1 255.255.255.224
+no shut
+exit
+do wr
+
+# VLAN 18
+int fa0/0.18
+encapsulation dot1q 18
+ip address 192.167.13.33 255.255.255.240
+no shut
+exit
+do wr
+
+# VLAN 28
+int fa0/0.28
+encapsulation dot1q 28
+ip address 192.167.13.49 255.255.255.248
+no shut
+exit
+do wr
+```
+
 ### Área PETÉN
 #### Switches
 ##### 3560-24PS (ESW2)
 ```
--- Configuración modo truncal
-int range fa0/23 - 24
-switchport trunk encapsulation dot1q
-switchport mode trunk
-no shutdown
+-- Creación VLAN
+vlan 18
+name RRHH
+vlan 38
+name VENTAS
+vlan 48
+name INFORMATICA
 exit
 do wr
 ```
@@ -1329,43 +1488,19 @@ do wr
 ```
 
 ```
--- Creación VLAN
-vlan 18
-name RRHH
-vlan 38
-name VENTAS
-vlan 48
-name INFORMATICA
-exit
-do wr
-```
-
-```
--- Configuración VLAN's con STP
-spanning-tree vlan 1 root primary
-spanning-tree vlan 18 root primary
-spanning-tree vlan 38 root primary
-spanning-tree vlan 48 root primary
-do wr
-```
-
-```
--- Configuración VLAN's como Switch Virtual Interface (SVI)
-int vlan 38
-ip address 192.158.13.1 255.255.255.224
+-- Configuración modo truncal
+int fa0/23
+switchport trunk encapsulation dot1q
+switchport mode trunk
 no shutdown
 exit
 do wr
 
-int vlan 48
-ip address 192.158.13.33 255.255.255.224
-no shutdown
-exit
-do wr
-
-int vlan 18
-ip address 192.158.13.65 255.255.255.240
-no shutdown
+-- Envio vlans a router
+int fa0/24
+switchport trunk encapsulation dot1q
+switchport mode trunk
+switchport trunk allowed vlan 1,18,38,48
 exit
 do wr
 ```
@@ -1424,28 +1559,44 @@ spanning-tree mode rapid-pvst
 do wr
 ```
 
-### Área QUICHE
-#### Switches
-##### 3560-24PS (ESW4)
+#### Router
+##### Router-PT (PETEN)
 ```
--- Configuración modo truncal
-int range fa0/22 - 24
-switchport trunk encapsulation dot1q
-switchport mode trunk
-no shutdown
+-- Leventar interfaz
+int fa0/0
+no shut
+exit
+do wr
+
+-- Configuración Subredes
+# VLAN 38
+int fa0/0.38
+encapsulation dot1q 38
+ip address 192.158.13.1 255.255.255.224
+no shut
+exit
+do wr
+
+# VLAN 48
+int fa0/0.48
+encapsulation dot1q 48
+ip address 192.158.13.33 255.255.255.224
+no shut
+exit
+do wr
+
+# VLAN 18
+int fa0/0.18
+encapsulation dot1q 18
+ip address 192.158.13.65 255.255.255.240
+no shut
 exit
 do wr
 ```
 
-```
--- Configuración del protocolo
-vtp version 2
-vtp mode server
-vtp domain G13
-vtp password usac
-do wr
-```
-
+### Área QUICHE
+#### Switches
+##### 3560-24PS (ESW4)
 ```
 -- Creación VLAN
 vlan 18
@@ -1461,39 +1612,29 @@ do wr
 ```
 
 ```
--- Configuración VLAN's con STP
-spanning-tree vlan 1 root primary
-spanning-tree vlan 18 root primary
-spanning-tree vlan 28 root primary
-spanning-tree vlan 38 root primary
-spanning-tree vlan 48 root primary
+-- Configuración del protocolo
+vtp version 2
+vtp mode server
+vtp domain G13
+vtp password usac
 do wr
 ```
 
 ```
--- Configuración VLAN's como Switch Virtual Interface (SVI)
-int vlan 38
-ip address 192.178.13.1 255.255.255.192
+-- Configuración modo truncal
+int range fa0/22 - 23
+switchport trunk encapsulation dot1q
+switchport mode trunk
 no shutdown
 exit
 do wr
 
-int vlan 48
-ip address 192.178.13.65 255.255.255.224
-no shutdown
-exit
-do wr
-
-int vlan 18
-ip address 192.178.13.97 255.255.255.240
-no shutdown
-exit
-do wr
-
-int vlan 28
-ip address 192.178.13.113 255.255.255.240
-no shutdown
-exit
+-- Envio vlans a router
+int fa0/24
+switchport trunk encapsulation dot1q
+switchport mode trunk
+switchport trunk allowed vlan 1,18,28,38,48
+exit 
 do wr
 ```
 
@@ -1618,14 +1759,456 @@ spanning-tree mode rapid-pvst
 do wr
 ```
 
-### ÁREA CORE (CONFIGURACIÓN)
-#### ROUTER-PT
+#### Router
+##### Router-PT (QUICHE)
 ```
+-- Leventar interfaz
+int fa0/0
+no shut
+exit
+do wr
+
+-- Configuración Subredes
+# VLAN 38
+int fa0/0.38
+encapsulation dot1q 38
+ip address 192.178.13.1 255.255.255.192
+no shut
+exit
+do wr
+
+# VLAN 48
+int fa0/0.48
+encapsulation dot1q 48
+ip address 192.178.13.65 255.255.255.224
+no shut
+exit
+do wr
+
+# VLAN 18
+int fa0/0.18
+encapsulation dot1q 18
+ip address 192.178.13.97 255.255.255.240
+no shut
+exit
+do wr
+
+# VLAN 28
+int fa0/0.28
+encapsulation dot1q 28
+ip address 192.178.13.113 255.255.255.240
+no shut
+exit
+do wr
 ```
 
+### ÁREA CORE (CONFIGURACIÓN)
+#### ROUTER-PT
 ##### CENTRAL
+```
+-- Configuración puertos y Máscara
+# IZABAL
+int fa5/0
+ip address 10.0.0.1 255.255.255.248
+no shut
+exit
+do wr
+
+# PETEN
+int fa6/0
+ip address 10.0.0.9 255.255.255.248
+no shut
+exit
+do wr
+
+# ESCUINTLA
+int fa7/0
+ip address 10.0.0.17 255.255.255.248
+no shut
+exit
+do wr
+
+# JUTIAPA
+int fa8/0
+ip address 10.0.0.25 255.255.255.248
+no shut
+exit
+do wr
+
+# QUICHE
+int fa9/0
+ip address 10.0.0.33 255.255.255.248
+no shut
+exit
+do wr
+```
+
+```
+-- Protocolo OSPF
+router ospf 1
+network 10.0.0.32 0.0.0.7 area 0
+network 10.0.0.8 0.0.0.7 area 0
+network 10.0.0.0 0.0.0.7 area 0
+network 10.0.0.16 0.0.0.7 area 0
+network 10.0.0.24 0.0.0.7 area 0
+exit
+do wr
+```
+
 ##### JUTIAPA
+```
+-- Configuración puertos y Máscara
+# PETEN
+int fa5/0
+ip address 10.0.0.41 255.255.255.248
+no shut
+exit
+do wr
+
+# IZABAL
+int fa6/0
+ip address 10.0.0.49 255.255.255.248
+no shut
+exit
+do wr
+
+# QUICHE
+int fa7/0
+ip address 10.0.0.57 255.255.255.248
+no shut
+exit
+do wr
+
+# ESCUINTLA
+int fa8/0
+ip address 10.0.0.65 255.255.255.248
+no shut
+exit
+do wr
+
+# CENTRAL
+int fa9/0
+ip address 10.0.0.26 255.255.255.248
+no shut
+exit
+do wr
+```
+
+```
+-- Protocolo RIP
+router rip
+no auto-summary
+version 2
+network 10.0.0.64
+no auto-summary
+exit
+do wr
+```
+
+```
+-- Protocolo OSPF
+router ospf 1
+network 10.0.0.24 0.0.0.7 area 0
+network 10.0.0.56 0.0.0.7 area 0
+network 10.0.0.40 0.0.0.7 area 0
+network 10.0.0.48 0.0.0.7 area 0
+redistribute rip subnets
+exit
+do wr
+```
+
+```
+-- Conexión con OSPF
+router rip
+redistribute ospf 1
+redistribute connected
+exit
+do wr
+```
+
 ##### QUICHE
+```
+-- Configuración puertos y Máscara
+# ESCUINTLA
+int fa5/0
+ip address 10.0.0.73 255.255.255.248
+no shut
+exit
+do wr
+
+# IZABAL
+int fa6/0
+ip address 10.0.0.81 255.255.255.248
+no shut
+exit
+do wr
+
+# JUTIAPA
+int fa7/0
+ip address 10.0.0.58 255.255.255.248
+no shut
+exit
+do wr
+
+# PETEN
+int fa8/0
+ip address 10.0.0.89 255.255.255.248
+no shut
+exit
+do wr
+
+# CENTRAL
+int fa9/0
+ip address 10.0.0.34 255.255.255.248
+no shut
+exit
+do wr
+```
+
+```
+-- Protocolo EIGRP
+router eigrp 1
+no auto-summary
+network 10.0.0.88 0.0.0.7
+network 10.0.0.80 0.0.0.7
+network 192.178.13.0 0.0.0.255
+no auto-summary
+exit
+do wr
+```
+```
+-- Protocolo OSPF
+router ospf 1
+network 10.0.0.32 0.0.0.7 area 0
+network 10.0.0.56 0.0.0.7 area 0
+network 10.0.0.72 0.0.0.7 area 0
+redistribute connected subnets 
+redistribute eigrp 1 subnets 
+exit
+do wr
+```
+
+```
+-- Conexión con OSPF
+router eigrp 1
+redistribute ospf 1
+redistribute connected
+exit
+do wr
+```
+
 ##### PETEN
+```
+-- Configuración puertos y Máscara
+# JUTIAPA
+int fa5/0
+ip address 10.0.0.42 255.255.255.248
+no shut
+exit
+do wr
+
+# CENTRAL
+int fa6/0
+ip address 10.0.0.10 255.255.255.248
+no shut
+exit
+do wr
+
+# ESCUINTLA
+int fa7/0
+ip address 10.0.0.97 255.255.255.248
+no shut
+exit
+do wr
+
+# QUICHE
+int fa8/0
+ip address 10.0.0.90 255.255.255.248
+no shut
+exit
+do wr
+
+# IZABAL
+int fa9/0
+ip address 10.0.0.105 255.255.255.248
+no shut
+exit
+do wr
+```
+
+```
+-- Protocolo EIGRP
+router eigrp 1
+no auto-summary
+network 10.0.0.88 0.0.0.7
+network 10.0.0.104 0.0.0.7
+network 192.158.13.0 0.0.0.255
+no auto-summary
+exit
+do wr
+```
+
+```
+-- Protocolo OSPF
+router ospf 1
+network 10.0.0.96 0.0.0.7 area 0
+network 10.0.0.40 0.0.0.7 area 0
+network 10.0.0.8 0.0.0.7 area 0
+redistribute connected subnets 
+redistribute eigrp 1 subnets 
+exit
+do wr
+```
+
+```
+-- Conexión con OSPF
+router eigrp 1
+redistribute ospf 1
+redistribute connected
+exit
+do wr
+```
+
 ##### ESCUINTLA
+```
+-- Configuración puertos y Máscara
+# QUICHE
+int fa5/0
+ip address 10.0.0.74 255.255.255.248
+no shut
+exit
+do wr
+
+# CENTRAL
+int fa6/0
+ip address 10.0.0.18 255.255.255.248
+no shut
+exit
+do wr
+
+# PETEN
+int fa7/0
+ip address 10.0.0.98 255.255.255.248
+no shut
+exit
+do wr
+
+# JUTIAPA
+int fa8/0
+ip address 10.0.0.66 255.255.255.248
+no shut
+exit
+do wr
+
+# IZABAL
+int fa9/0
+ip address 10.0.0.113 255.255.255.248
+no shut
+exit
+do wr
+```
+
+```
+-- Protocolo RIP
+router rip
+no auto-summary
+version 2
+network 10.0.0.64
+network 192.148.13.0
+no auto-summary
+exit
+do wr
+```
+
+```
+-- Protocolo OSPF
+router ospf 1
+network 10.0.0.112 0.0.0.7 area 0
+network 10.0.0.96 0.0.0.7 area 0
+network 10.0.0.72 0.0.0.7 area 0
+network 10.0.0.16 0.0.0.7 area 0
+redistribute rip subnets
+exit
+do wr
+```
+
+```
+-- Conexión con OSPF
+router rip
+redistribute ospf 1
+redistribute connected
+exit
+do wr
+```
+
 ##### IZABAL
+```
+-- Configuración puertos y Máscara
+# CENTRAL
+int fa5/0
+ip address 10.0.0.2 255.255.255.248
+no shut
+exit
+do wr
+
+# JUTIAPA
+int fa6/0
+ip address 10.0.0.50 255.255.255.248
+no shut
+exit
+do wr
+
+# QUICHE
+int fa7/0
+ip address 10.0.0.82 255.255.255.248
+no shut
+exit
+do wr
+
+# PETEN
+int fa8/0
+ip address 10.0.0.106 255.255.255.248
+no shut
+exit
+do wr
+
+# ESCUINTLA
+int fa9/0
+ip address 10.0.0.114 255.255.255.248
+no shut
+exit
+do wr
+```
+
+```
+-- Protocolo EIGRP
+router eigrp 1
+no auto-summary
+network 10.0.0.104 0.0.0.7
+network 10.0.0.80 0.0.0.7
+network 192.167.13.0 0.0.0.255
+no auto-summary
+exit
+do wr
+```
+
+```
+-- Protocolo OSPF
+router ospf 1
+network 10.0.0.0 0.0.0.7 area 0
+network 10.0.0.48 0.0.0.7 area 0
+network 10.0.0.112 0.0.0.7 area 0
+redistribute connected subnets 
+redistribute eigrp 1 subnets 
+exit
+do wr
+```
+
+```
+-- Conexión con OSPF
+router eigrp 1
+redistribute ospf 1
+redistribute connected
+exit
+do wr
+```
